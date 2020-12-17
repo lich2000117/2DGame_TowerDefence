@@ -8,5 +8,5 @@ Using custom Library, Bagel.
 Simply Download source code and run using IntelliJ IDE
 
 <p align="left">
-  <img src="image.png"  width="300" >
+  <img src="image.png"  width="1000" >
 </p>
