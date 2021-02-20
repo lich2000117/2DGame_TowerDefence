@@ -27,6 +27,7 @@ public class ShadowDefend extends AbstractGame {
 
     // The spawn delay (in seconds) to spawn slicers
     private static final int INITIAL_TIMESCALE = 1;
+    public static final int MAX_TIMESCALE = 10;
     // Timescale is made static because it is a universal property of the game and the specification
     private static int timescale = INITIAL_TIMESCALE;
     private static int currLevelNum = 0;
@@ -81,7 +82,9 @@ public class ShadowDefend extends AbstractGame {
      * Increases the timescale
      */
     private void increaseTimescale() {
-        timescale++;
+        if (timescale<MAX_TIMESCALE) {
+            timescale++;
+        }
     }
 
     /**
