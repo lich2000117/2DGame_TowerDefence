@@ -4,11 +4,15 @@ import bagel.map.TiledMap;
 import bagel.util.Point;
 import bagel.util.Rectangle;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * a class stores current level's information
@@ -21,6 +25,11 @@ public class Level {
     private List<String> wave_list = Collections.EMPTY_LIST;
     {
         try {
+            //try (InputStream resource = this.getClass().getResourceAsStream("levels/waves.txt")) {
+              //  wave_list =
+                //        new BufferedReader(new InputStreamReader(resource,
+                  //              StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+            //}
             wave_list = Files.readAllLines(Paths.get("res/levels/waves.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();

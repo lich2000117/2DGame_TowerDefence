@@ -12,6 +12,8 @@ public class ShadowDefend extends AbstractGame {
     public static final int WIDTH = 1024;
 
     //storing each map's file:
+    //private static final String MAP_FILE1 = ShadowDefend.class.getResource("/levels/1.tmx").toString();
+    //private static final String MAP_FILE2 = ShadowDefend.class.getResource("/levels/2.tmx").toString();
     private static final String MAP_FILE1 = "res/levels/1.tmx";
     private static final String MAP_FILE2 = "res/levels/2.tmx";
 
