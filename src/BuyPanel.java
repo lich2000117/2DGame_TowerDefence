@@ -3,6 +3,11 @@ import bagel.util.Colour;
 import bagel.util.Point;
 import bagel.util.Rectangle;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  *
  * A Buy panel that generate buying options and
@@ -13,12 +18,31 @@ import bagel.util.Rectangle;
 public class BuyPanel extends Observer{
 
     //resource paths:
+    private static final String tempDir = System.getProperty("java.io.tmpdir");
     private static final String DOLLAR = "$";
-    private static final String PANEL = "res/images/buypanel.png";
-    private static final String TANK = "res/images/tank.png";
-    private static final String SUPERTANK = "res/images/supertank.png";
-    private static final String AIRSUPPORT = "res/images/airsupport.png";
-    private static final String FONT_PATH = "res/fonts/DejaVuSans-Bold.ttf";
+    private static final String PANEL = tempDir+File.separator+"buypanel.png";
+    private static final String TANK = tempDir+File.separator+"tank.png";
+    private static final String SUPERTANK = tempDir+File.separator+"supertank.png";
+    private static final String AIRSUPPORT = tempDir+File.separator+"airsupport.png";
+    private static final String FONT_NAME = "/fonts/DejaVuSans-Bold.ttf";
+
+    InputStream inputStream = getClass().getResourceAsStream(FONT_NAME);
+
+    File temp = new File(tempDir+File.separator+"tempfont1.ttf");
+    String FONT_PATH = "";
+    {
+        try {
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            OutputStream outStream = new FileOutputStream(temp);
+            outStream.write(buffer);
+            FONT_PATH = temp.getAbsolutePath();
+        }
+        catch (Exception e) {
+            // 如果有错误输出内容
+            e.printStackTrace();
+        }
+    }
 
     //basic information for rendering:
     private static final int TANK_PRICE = 250;

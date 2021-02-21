@@ -5,6 +5,11 @@ import bagel.util.Point;
 import bagel.util.Rectangle;
 import bagel.util.Vector2;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * Represents a game entity
  */
@@ -23,7 +28,25 @@ public abstract class Sprite {
      *
      */
     public Sprite(Point point, String imageSrc, int damage) {
-        this.image = new Image(imageSrc);
+        InputStream inputStream = getClass().getResourceAsStream(imageSrc);
+        String tempDir = System.getProperty("java.io.tmpdir");
+        File temp = new File(tempDir+File.separator+"tmp.txt");
+        String imgPath = "";
+        {
+            try {
+                byte[] buffer = new byte[inputStream.available()];
+                inputStream.read(buffer);
+                OutputStream outStream = new FileOutputStream(temp);
+                outStream.write(buffer);
+                imgPath = temp.getAbsolutePath();
+            }
+            catch (Exception e) {
+                // 如果有错误输出内容
+                e.printStackTrace();
+            }
+        }
+
+        this.image = new Image(imgPath);
         this.rect = image.getBoundingBoxAt(point);
         this.angle = 0;
         this.damage = damage;

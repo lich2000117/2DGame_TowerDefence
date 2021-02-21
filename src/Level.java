@@ -25,12 +25,12 @@ public class Level {
     private List<String> wave_list = Collections.EMPTY_LIST;
     {
         try {
-            //try (InputStream resource = this.getClass().getResourceAsStream("levels/waves.txt")) {
-              //  wave_list =
-                //        new BufferedReader(new InputStreamReader(resource,
-                  //              StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
-            //}
-            wave_list = Files.readAllLines(Paths.get("res/levels/waves.txt"), StandardCharsets.UTF_8);
+            try (InputStream resource = this.getClass().getResourceAsStream("levels/waves.txt")) {
+                wave_list =
+                        new BufferedReader(new InputStreamReader(resource,
+                                StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+            }
+           // wave_list = Files.readAllLines(Paths.get("res/levels/waves.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }

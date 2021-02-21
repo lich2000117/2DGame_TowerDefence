@@ -5,6 +5,11 @@ import bagel.util.Colour;
 import bagel.util.Point;
 import bagel.util.Rectangle;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 
 /**
  * A status panel that shows status
@@ -14,8 +19,28 @@ public class StatusPanel extends Observer{
 
     //Status Strings:
     private static final String WIN = "Winner!";
-    private static final String FONT_PATH = "res/fonts/DejaVuSans-Bold.ttf";
-    private static final String IMG_PATH = "res/images/statuspanel.png";
+    private static final String FONT_NAME = "/fonts/DejaVuSans-Bold.ttf";
+
+    InputStream inputStream = getClass().getResourceAsStream(FONT_NAME);
+    String tempDir = System.getProperty("java.io.tmpdir");
+    File temp = new File(tempDir+File.separator+"tempfont1.ttf");
+    String FONT_PATH = "";
+    {
+        try {
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            OutputStream outStream = new FileOutputStream(temp);
+            outStream.write(buffer);
+            FONT_PATH = temp.getAbsolutePath();
+        }
+        catch (Exception e) {
+            // 如果有错误输出内容
+            e.printStackTrace();
+        }
+    }
+
+
+    private static final String IMG_NAME = "/images/statuspanel.png";
     private static final int PANEL_WIDTH = 25;
     private static final int DEFAULT_TC = 1;
     private static final int LOW_HEALTH = 15;
@@ -39,6 +64,23 @@ public class StatusPanel extends Observer{
      * @param level is the corresponding current level class, in order to get current wave and status
      */
     public StatusPanel(Player player, Level level) {
+        InputStream inputStream = getClass().getResourceAsStream(IMG_NAME);
+        String tempDir = System.getProperty("java.io.tmpdir");
+        File temp = new File(tempDir+File.separator+"tmp.txt");
+        String IMG_PATH = "";
+        {
+            try {
+                byte[] buffer = new byte[inputStream.available()];
+                inputStream.read(buffer);
+                OutputStream outStream = new FileOutputStream(temp);
+                outStream.write(buffer);
+                IMG_PATH = temp.getAbsolutePath();
+            }
+            catch (Exception e) {
+                // 如果有错误输出内容
+                e.printStackTrace();
+            }
+        }
         this.image = new Image(IMG_PATH);
         this.font = new Font(FONT_PATH, fontSize);
         this.lives = player.getHealth();

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class SuperSlicer extends Enemy {
 
-    private static final String IMAGE_FILE = "res/images/superslicer.png";
+    private static final String IMAGE_FILE = "/images/superslicer.png";
     private static final double SPEED = 0.75;
     private static final int DAMAGE = 2;
     private static final int REWARD = 15;

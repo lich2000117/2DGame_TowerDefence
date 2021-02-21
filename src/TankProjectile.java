@@ -6,7 +6,7 @@ import bagel.util.Point;
  */
 public class TankProjectile extends Projectile {
 
-    private static final String IMAGE_FILE = "res/images/tank_projectile.png";
+    private static final String IMAGE_FILE = "/images/tank_projectile.png";
     private static final int DAMAGE = 1;
     private static final double SPEED = 10;
 

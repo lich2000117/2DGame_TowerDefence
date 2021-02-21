@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class ApexSlicer extends Enemy {
 
-    private static final String IMAGE_FILE = "res/images/apexslicer.png";
+    private static final String IMAGE_FILE = "/images/apexslicer.png";
     private static final double SPEED = 0.375;
     private static final int DAMAGE = 16;
     private static final int REWARD = 150;
