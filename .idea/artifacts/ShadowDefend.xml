@@ -19,6 +19,19 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-assimp/3.2.2/lwjgl-assimp-3.2.2-natives-macos.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-assimp/3.2.2/lwjgl-assimp-3.2.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/lwjgl/lwjgl-openal/3.2.2/lwjgl-openal-3.2.2.jar" path-in-jar="/" />
+      <element id="library" level="project" name="bagel" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-assimp:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-assimp:natives-macos:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-glfw:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-glfw:natives-macos:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-openal:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-openal:natives-macos:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-opengl:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-opengl:natives-macos:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-stb:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl-stb:natives-macos:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl:3.2.2" />
+      <element id="library" level="project" name="Maven: org.lwjgl:lwjgl:natives-macos:3.2.2" />
     </root>
   </artifact>
 </component>
