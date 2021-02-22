@@ -7,7 +7,7 @@ import bagel.util.Point;
 
 public class Bomb extends Sprite{
 
-    private static final String IMAGE_FILE = "res/images/explosive.png";
+    private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/explosive.png";
     private static final int DAMAGE = 500;
     private static final double DETONATEDELAY = 2.0;
     private static final int RADIUS = 200;

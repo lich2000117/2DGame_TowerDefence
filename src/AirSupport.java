@@ -16,7 +16,7 @@ public class AirSupport extends Tower{
     private static final int SPEED = 3;
     private static final int COST = 500;
     private static final int RADIUS = 200;
-    private static final String IMAGE = "res/images/airsupport.png";
+    private static final String IMAGE = Sprite.getCurPath() + "res/images/airsupport.png";
     private static boolean direction = true;
     private boolean finishedFly = false;
     private boolean allDetonated = false;

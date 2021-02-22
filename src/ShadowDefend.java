@@ -1,4 +1,6 @@
 import bagel.*;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +16,8 @@ public class ShadowDefend extends AbstractGame {
     //storing each map's file:
     //private static final String MAP_FILE1 = ShadowDefend.class.getResource("/levels/1.tmx").toString();
     //private static final String MAP_FILE2 = ShadowDefend.class.getResource("/levels/2.tmx").toString();
-    private static final String MAP_FILE1 = "res/levels/1.tmx";
-    private static final String MAP_FILE2 = "res/levels/2.tmx";
+    private static final String MAP_FILE1 = Sprite.getCurPath() + "res/levels/1.tmx";
+    private static final String MAP_FILE2 = Sprite.getCurPath() + "res/levels/2.tmx";
 
     //we make the following variables public since they are necessary public settings.
     public static final double FPS = 60;

@@ -4,10 +4,7 @@ import bagel.map.TiledMap;
 import bagel.util.Point;
 import bagel.util.Rectangle;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,12 +27,11 @@ public class Level {
                 //        new BufferedReader(new InputStreamReader(resource,
                   //              StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
             //}
-            wave_list = Files.readAllLines(Paths.get("res/levels/waves.txt"), StandardCharsets.UTF_8);
+            wave_list = Files.readAllLines(Paths.get(Sprite.getCurPath() + "res/levels/waves.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     private static final int BASE_WAVE_AWARD = 150;
     private static final int BONUS_WAVE_AWARD = 100;

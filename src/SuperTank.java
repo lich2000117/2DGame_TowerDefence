@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SuperTank extends Tower{
 
-    private static final String IMAGE_FILE = "res/images/supertank.png";
+    private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/supertank.png";
     private static final int DAMAGE = 3;
     private static final int COST = 600;
     private static final int RADIUS = 150;

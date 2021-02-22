@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Slicer extends Enemy {
 
-    private static final String IMAGE_FILE = "res/images/slicer.png";
+    private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/slicer.png";
     private static final double SPEED = 1;
     private static final int DAMAGE = 1;
     private static final int REWARD = 2;

@@ -14,11 +14,11 @@ public class BuyPanel extends Observer{
 
     //resource paths:
     private static final String DOLLAR = "$";
-    private static final String PANEL = "res/images/buypanel.png";
-    private static final String TANK = "res/images/tank.png";
-    private static final String SUPERTANK = "res/images/supertank.png";
-    private static final String AIRSUPPORT = "res/images/airsupport.png";
-    private static final String FONT_PATH = "res/fonts/DejaVuSans-Bold.ttf";
+    private static final String PANEL = Sprite.getCurPath() + "res/images/buypanel.png";
+    private static final String TANK = Sprite.getCurPath() + "res/images/tank.png";
+    private static final String SUPERTANK = Sprite.getCurPath() + "res/images/supertank.png";
+    private static final String AIRSUPPORT = Sprite.getCurPath() + "res/images/airsupport.png";
+    private static final String FONT_PATH = Sprite.getCurPath() + "res/fonts/DejaVuSans-Bold.ttf";
 
     //basic information for rendering:
     private static final int TANK_PRICE = 250;

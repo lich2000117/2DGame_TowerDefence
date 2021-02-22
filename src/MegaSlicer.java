@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class MegaSlicer extends Enemy {
 
-    private static final String IMAGE_FILE = "res/images/megaslicer.png";
+    private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/megaslicer.png";
     private static final double SPEED = 0.75;
     private static final int DAMAGE = 4;
     private static final int REWARD = 10;

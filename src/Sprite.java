@@ -5,6 +5,8 @@ import bagel.util.Point;
 import bagel.util.Rectangle;
 import bagel.util.Vector2;
 
+import java.io.File;
+
 /**
  * Represents a game entity
  */
@@ -14,6 +16,7 @@ public abstract class Sprite {
     private Rectangle rect;
     private double angle;
     private int damage;
+
 
     /**
      * Creates a new Sprite (game entity)
@@ -27,6 +30,14 @@ public abstract class Sprite {
         this.rect = image.getBoundingBoxAt(point);
         this.angle = 0;
         this.damage = damage;
+    }
+
+    private static File f = new File(System.getProperty("java.class.path"));
+    private static File dir = f.getAbsoluteFile().getParentFile();
+    private static String curPath = dir.toString();
+
+    public static String getCurPath(){
+        return curPath + File.separator;
     }
 
 
