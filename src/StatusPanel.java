@@ -14,8 +14,8 @@ public class StatusPanel extends Observer{
 
     //Status Strings:
     private static final String WIN = "Winner!";
-    private static final String FONT_PATH = "res/fonts/DejaVuSans-Bold.ttf";
-    private static final String IMG_PATH = "res/images/statuspanel.png";
+    private static final String FONT_PATH = Sprite.getCurPath() + "res/fonts/DejaVuSans-Bold.ttf";
+    private static final String IMG_PATH = Sprite.getCurPath() + "res/images/statuspanel.png";
     private static final int PANEL_WIDTH = 25;
     private static final int DEFAULT_TC = 1;
     private static final int LOW_HEALTH = 15;
