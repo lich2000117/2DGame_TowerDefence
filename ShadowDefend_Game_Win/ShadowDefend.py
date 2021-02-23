@@ -29,17 +29,30 @@ class MY_WINDOW():
  
         #标签
         self.title_label = Label(self.init_window_name, text="ShadowDefend")
-        self.title_label.grid(row=0, column=1)
-        #文本框
+        self.title_label.grid(row=0, column=2)
         
         #self.log_data_Text = Text(self.init_window_name, width=65, height=9) # 日志框
         #self.log_data_Text.grid(row=13, column=0, columnspan=10)
         #按钮
-        self.start_button = Button(self.init_window_name, text="开始游戏", bg="brown1", width=15,command=lambda : self.run_game(file_path)) # 调用内部方法 加()为直接调用
-        self.start_button.grid(row=2, column=0)
-        self.install_java_button = Button(self.init_window_name, text="安装必备文件", bg="brown1", width=15,command=lambda : self.openNewWindow()) # 调用内部方法 加()为直接调用
-        self.install_java_button.grid(row=2, column=2)
-        self.init_window_name.grid_rowconfigure(1, minsize=40)  # Spacing 
+        self.start_button = Button(self.init_window_name, text="开始游戏", bg="brown1", width=15,command=lambda : self.selectDifficulty(file_path)) # 调用内部方法 加()为直接调用
+        self.start_button.grid(row=2, column=1)
+        self.install_java_button = Button(self.init_window_name, text="安装必备文件", bg="brown1", width=15,command=lambda : self.moreHelpWindow()) # 调用内部方法 加()为直接调用
+        self.install_java_button.grid(row=2, column=3)
+
+        # Spacing 
+        self.init_window_name.grid_rowconfigure(0, minsize=40)  #Row
+        self.init_window_name.grid_rowconfigure(1, minsize=20)  
+        self.init_window_name.grid_rowconfigure(3, minsize=60)
+        
+        self.init_window_name.grid_columnconfigure(0, minsize=80)
+        self.init_window_name.grid_columnconfigure(1, minsize=1)  #Column
+        self.init_window_name.grid_columnconfigure(2, minsize=1)
+        self.init_window_name.grid_columnconfigure(3, minsize=1)
+        self.init_window_name.grid_columnconfigure(4, minsize=50)
+
+        #footer
+        self.title_label = Label(self.init_window_name, text="Java Application, Created by LCH.")
+        self.title_label.grid(row=3, column=2)
        
     #获取当前时间
     def get_current_time(self):
@@ -83,20 +96,19 @@ class MY_WINDOW():
         file_path = self.resource_path(file_path)
         return subprocess.call(['javaw', '-jar', file_path])
 
-    # function to open a new window for downloading necessary apps
+
+    # function to open a new window for more Help Page
     # on a button click 
-    def openNewWindow(self,): 
+    def moreHelpWindow(self,): 
         # Toplevel object which will be treated as a new window 
         # 窗口设置
         newWindow = Toplevel(self.init_window_name) 
         newWindow.resizable(False, False)
         self.window_to_center(newWindow)
-
         # sets the title of the 
         # Toplevel widget 
         newWindow.title("更多帮助") 
 
-        
         #Java Link:
         text = Label(newWindow, text="软件基于Java开发，请下载必备组件CDK运行：", height=4)
         text.pack()
@@ -105,20 +117,40 @@ class MY_WINDOW():
         link1 = Label(newWindow, text="JDK Download", fg="blue", cursor="hand2")
         link1.pack()
         link1.bind("<Button-1>", lambda e: webbrowser.open_new("https://www.oracle.com/java/technologies/javase-jdk15-downloads.html#license-lightbox"))
-        
         #Author Link:
         t2 = Label(newWindow, text="作者Author:", height=3)
         t2.pack()
         link2 = Label(newWindow, text="Github ☜ ( ͡❛ ͜ʖ ͡❛)", fg="blue", cursor="hand2")
         link2.pack()
         link2.bind("<Button-2>", lambda e: webbrowser.open_new("https://github.com/lich2000117"))
-
         #Project Link:
         t3 = Label(newWindow, text="Project Source Code:", height=3)
         t3.pack()
         link3 = Label(newWindow, text="Source Code", fg="blue", cursor="hand2")
         link3.pack()
         link3.bind("<Button-3>", lambda e: webbrowser.open_new("https://github.com/lich2000117/ShadowDefend_Game"))
+
+
+    # function to open a new window for Selecting Difficulties
+    # on a button click 
+    def selectDifficulty(self,file_path): 
+        # Toplevel object which will be treated as a new window 
+        # 窗口设置
+        newWindow = Toplevel(self.init_window_name) 
+        newWindow.resizable(False, False)
+        self.window_to_center(newWindow)
+        # sets the title of the 
+        # Toplevel widget 
+        newWindow.title("开始游戏") 
+
+        #Java Link:
+        text = Label(newWindow, text="困难选择：", height=4, width = 60)
+        text.pack()
+        start_button = Button(newWindow, text="Eazy", bg="green", width=25,command=lambda : self.run_game(file_path)) # 调用内部方法 加()为直接调用
+        start_button.pack()
+        install_java_button = Button(newWindow, text="Hard", bg="red", width=25,command=lambda : self.moreHelpWindow()) # 调用内部方法 加()为直接调用
+        install_java_button.pack()
+
         
         
        
