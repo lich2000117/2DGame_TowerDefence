@@ -45,7 +45,7 @@ public abstract class Sprite {
                 curPath = new File(Sprite.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getPath();
                 //System.out.println(curPath);
             } catch (URISyntaxException e) {
-                System.out.println(e);
+                System.out.println(e)
             }
         }
         return curPath + File.separator;

@@ -110,6 +110,10 @@ class MY_WINDOW():
         # Toplevel widget 
         newWindow.title("更多帮助") 
 
+        #Open link function
+        def openLink(link):
+            webbrowser.open_new(link)
+
         #Java Link:
         text = Label(newWindow, text="软件基于Java开发，请下载必备组件CDK运行：", height=4)
         text.pack()
@@ -117,7 +121,7 @@ class MY_WINDOW():
         t1.pack()
         link1 = Label(newWindow, text="JDK Download", fg="blue", cursor="hand2")
         link1.pack()
-        link1.bind("<Button-1>", lambda e: webbrowser.open_new("https://www.oracle.com/java/technologies/javase-jdk15-downloads.html#license-lightbox"))
+        link1.bind("<Button-1>", lambda e: openLink("https://www.oracle.com/java/technologies/javase-jdk15-downloads.html#license-lightbox"))
         # Seperator ------------------------------------------
         sep = Label(newWindow, text="------------------More------------------", height=3)
         sep.pack()
@@ -126,13 +130,13 @@ class MY_WINDOW():
         t2.pack()
         link2 = Label(newWindow, text="Github ☜ ( ͡❛ ͜ʖ ͡❛)", fg="blue", cursor="hand2")
         link2.pack()
-        link2.bind("<Button-2>", lambda e: webbrowser.open_new("https://github.com/lich2000117"))
+        link2.bind("<Button-1>", lambda e: openLink("https://github.com/lich2000117"))
         #Project Link:
         t3 = Label(newWindow, text="Project Source Code:", height=3)
         t3.pack()
         link3 = Label(newWindow, text="Source Code", fg="blue", cursor="hand2")
         link3.pack()
-        link3.bind("<Button-3>", lambda e: webbrowser.open_new("https://github.com/lich2000117/ShadowDefend_Game"))
+        link3.bind("<Button-1>", lambda e: openLink("https://github.com/lich2000117/ShadowDefend_Game"))
 
 
     # function to open a new window for Selecting Difficulties
