@@ -42,9 +42,7 @@ public abstract class Sprite {
         String curPath = "";
         {
             try {
-                curPath = new File(Sprite.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-                //System.out.println(curPath);
-                curPath = curPath.substring(0, curPath.lastIndexOf('/') + 1);
+                curPath = new File(Sprite.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getPath();
                 //System.out.println(curPath);
             } catch (URISyntaxException e) {
                 System.out.println(e);
