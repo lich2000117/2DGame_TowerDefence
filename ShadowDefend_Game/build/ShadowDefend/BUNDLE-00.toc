@@ -1,3 +1,0 @@
-([('ShadowDefend',
-   '/Users/lee/Documents/GitHub/ShadowDefend_Game/ShadowDefend_Game/dist/ShadowDefend',
-   'EXECUTABLE')],)
