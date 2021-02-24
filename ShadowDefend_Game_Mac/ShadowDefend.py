@@ -1,3 +1,10 @@
+# MacOS
+# Python Packaging system to run java jar programme.
+# Simple User Interface
+# Programmed by Chenghao Li
+# github: lich2000117
+# 24/02/2021
+
 import subprocess
 import sys
 import os
@@ -96,9 +103,9 @@ class MY_WINDOW():
     def run_game(self, file_path):
         file_path = self.resource_path(file_path)
         try:
-            v .Popen(['javaw', '-jar', file_path])
+            subprocess.call(['javaw', '-jar', file_path])
         except:
-            subprocess.Popen(['java', '-jar', file_path])
+            subprocess.call(['java', '-jar', file_path])
 
 
     # function to open a new window for more Help Page

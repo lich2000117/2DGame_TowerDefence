@@ -6,7 +6,6 @@ import bagel.util.Rectangle;
 import bagel.util.Vector2;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**

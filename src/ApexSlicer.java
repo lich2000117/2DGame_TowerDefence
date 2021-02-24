@@ -10,7 +10,7 @@ public class ApexSlicer extends Enemy {
     private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/apexslicer.png";
     private static final double SPEED = 0.375;
     private static final int DAMAGE = 16;
-    private static final int REWARD = 150;
+    private static final int REWARD = 15;
     private static final int HEALTH = 25;
     private static final int KIDSNUM = 4;
     private List<Point> polyline;

@@ -21,7 +21,7 @@ public class Level {
     //since the input is always valid, downcasting
     private List<String> wave_list = Collections.EMPTY_LIST;
 
-    private static final int BASE_WAVE_AWARD = 150;
+    private static final int BASE_WAVE_AWARD = 100;
     private static final int BONUS_WAVE_AWARD = 100;
     private static final String TANK = "tank";
     private static final String SUPERTANK = "supertank";
