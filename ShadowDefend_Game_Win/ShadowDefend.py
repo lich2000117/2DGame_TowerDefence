@@ -96,9 +96,9 @@ class MY_WINDOW():
     def run_game(self, file_path):
         file_path = self.resource_path(file_path)
         try:
-            subprocess.call(['javaw', '-jar', file_path])
+            v .Popen(['javaw', '-jar', file_path])
         except:
-            subprocess.call(['java', '-jar', file_path])
+            subprocess.Popen(['java', '-jar', file_path])
 
 
     # function to open a new window for more Help Page
@@ -189,11 +189,12 @@ class MY_WINDOW():
         #Function that controls progress bar
         def launch_Check():
             pass_check = False
+            factor = 0.01
             for i in range(1, 101):
-                sleep(random.randint(1,9)*0.01)
+                sleep(random.randint(1,7)*factor)
                 p.step()
                 if (i<10):
-                    s.configure("LabeledProgressbar", text="Preparing... {0} %      ".format(i))
+                    s.configure("LabeledProgressbar", text="Initializing... {0} %      ".format(i))
                 # Check Java Availability at 25%
                 elif (i >= 15) and (i <= 30):
                     s.configure("LabeledProgressbar", text="Checking Java Availability... {0} %      ".format(i))
@@ -207,11 +208,12 @@ class MY_WINDOW():
                                 root.update()
                                 Button(root, command=self.moreHelpWindow, text="Download Java JDK",bg='red').pack()
                                 return False
-                            
-                elif (i>50):
-                    s.configure("LabeledProgressbar", text="Launching Game... {0} %      ".format(i))
+                elif (i>50) and (i<75):
+                    factor = 0.02
+                    s.configure("LabeledProgressbar", text="Loading Game... {0} %      ".format(i))
                 else:
-                    s.configure("LabeledProgressbar", text="Loading... {0} %      ".format(i))
+                    factor = 0.008
+                    s.configure("LabeledProgressbar", text="Launching Game... {0} %      ".format(i))
                 root.update()
             return True
         #If finish progress bar
@@ -238,6 +240,5 @@ def start_my_app():
 
 
 if __name__ == '__main__':
-    #run_game('data/bagel.jar')
     start_my_app()
     

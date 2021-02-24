@@ -1,15 +1,20 @@
 import bagel.*;
+import bagel.Window;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.*;
 
 /**
  * ShadowDefend, a tower defence game.
  */
 public class ShadowDefend extends AbstractGame {
 
-    public static String GAME_DIFFICULTY;
     // make window configuration public since it's useful.
     public static final int HEIGHT = 768;
     public static final int WIDTH = 1024;
@@ -32,7 +37,7 @@ public class ShadowDefend extends AbstractGame {
 
     // The spawn delay (in seconds) to spawn slicers
     private static final int INITIAL_TIMESCALE = 1;
-    public static final int MAX_TIMESCALE = 10;
+    public static final int MAX_TIMESCALE = 5;
     // Timescale is made static because it is a universal property of the game and the specification
     private static int timescale = INITIAL_TIMESCALE;
     private static int currLevelNum = 0;
@@ -64,7 +69,6 @@ public class ShadowDefend extends AbstractGame {
         //initialize panels
         this.statusPanel = new StatusPanel(player, currLevel);
         this.buyPanel = new BuyPanel(player, currLevel);
-        this.GAME_DIFFICULTY = GAME_DIFFICULTY;
     }
 
     /**
@@ -73,7 +77,6 @@ public class ShadowDefend extends AbstractGame {
      * @param args Optional command-line arguments
      */
     public static void main(String[] args) {
-        //System.out.println(args[1]);
         new ShadowDefend().run();
     }
 
@@ -154,4 +157,5 @@ public class ShadowDefend extends AbstractGame {
         statusPanel.update(getTimescale());
         buyPanel.update(input);
     }
+
 }

@@ -61,7 +61,6 @@ public class Level {
                 wave_list = Files.readAllLines(Paths.get(
                         Sprite.getCurPath() + "res/levels/wavesOfLevel"+count+".txt"),
                                     StandardCharsets.UTF_8);
-                System.out.println(wave_list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
