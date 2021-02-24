@@ -95,7 +95,10 @@ class MY_WINDOW():
     # Function that runs game directly using command line
     def run_game(self, file_path):
         file_path = self.resource_path(file_path)
-        return subprocess.call(['javaw', '-jar', file_path])
+        try:
+            subprocess.call(['javaw', '-jar', file_path])
+        except:
+            subprocess.call(['java', '-jar', file_path])
 
 
     # function to open a new window for more Help Page
@@ -198,7 +201,7 @@ class MY_WINDOW():
                         # Check if Java is installed
                         if not pass_check:
                             try:
-                                subprocess.call('javaw')
+                                subprocess.call('java')
                             except Exception:
                                 s.configure("LabeledProgressbar", text="Error! Missing Java JDK!      ".format(i), bg='red')
                                 root.update()

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="ShadowDefend_mac">
-    <output-path>$PROJECT_DIR$/ShadowDefend_Game/data</output-path>
+    <output-path>$PROJECT_DIR$/ShadowDefend_Game_mac/data</output-path>
     <root id="archive" name="bagel.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />

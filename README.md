@@ -16,6 +16,9 @@ packaging:
 
 pyinstaller -F -w -i icon.ico --add-data="data/*:data" ShadowDefend.py --clean
 
+windows:
+pyinstaller -F -w -i icon.ico --add-data="data/*;data" ShadowDefend.py --clean
+
 Path:
 ShadowDefend_Game/ShadowDefend_Game/Dist/ShadowDefend
 

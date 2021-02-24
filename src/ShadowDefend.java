@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class ShadowDefend extends AbstractGame {
 
+    public static String GAME_DIFFICULTY;
     // make window configuration public since it's useful.
     public static final int HEIGHT = 768;
     public static final int WIDTH = 1024;
@@ -54,8 +55,8 @@ public class ShadowDefend extends AbstractGame {
         this.player = Player.setPlayer(START_MONEY, START_HEALTH);
 
         //add 2 levels into our levels lists
-        levels.add(new Level(MAP_FILE1,player));
-        levels.add(new Level(MAP_FILE2,player));
+        levels.add(new Level(MAP_FILE1,player, 1));
+        levels.add(new Level(MAP_FILE2,player, 2));
 
         //start with first level, index at 0
         this.currLevel = levels.get(0);
@@ -63,6 +64,7 @@ public class ShadowDefend extends AbstractGame {
         //initialize panels
         this.statusPanel = new StatusPanel(player, currLevel);
         this.buyPanel = new BuyPanel(player, currLevel);
+        this.GAME_DIFFICULTY = GAME_DIFFICULTY;
     }
 
     /**
@@ -71,6 +73,7 @@ public class ShadowDefend extends AbstractGame {
      * @param args Optional command-line arguments
      */
     public static void main(String[] args) {
+        //System.out.println(args[1]);
         new ShadowDefend().run();
     }
 

@@ -1,0 +1,3 @@
+([('ShadowDefend',
+   '/Users/lee/Documents/GitHub/ShadowDefend_Game/ShadowDefend_Game_Mac/dist/ShadowDefend',
+   'EXECUTABLE')],)

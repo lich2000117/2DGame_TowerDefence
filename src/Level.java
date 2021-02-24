@@ -20,18 +20,6 @@ public class Level {
     //get a list of string storing waves:
     //since the input is always valid, downcasting
     private List<String> wave_list = Collections.EMPTY_LIST;
-    {
-        try {
-            //try (InputStream resource = this.getClass().getResourceAsStream("levels/waves.txt")) {
-              //  wave_list =
-                //        new BufferedReader(new InputStreamReader(resource,
-                  //              StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
-            //}
-            wave_list = Files.readAllLines(Paths.get(Sprite.getCurPath() + "res/levels/waves.txt"), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private static final int BASE_WAVE_AWARD = 150;
     private static final int BONUS_WAVE_AWARD = 100;
@@ -49,7 +37,7 @@ public class Level {
     private BuyPanel buyPanel;
 
     //max Wave is the first integer of last line, so use following methods
-    private int maxWaves = Integer.parseInt(Arrays.asList(wave_list.get(wave_list.size() - 1).split(",")).get(0));
+    private int maxWaves;
 
     private int waveIndex = 0;
     private String status = "Awaiting Start";
@@ -65,7 +53,21 @@ public class Level {
      * @param map the current level map file, path defined in ShadowDefend Class
      * @param player the player entity that currently plays on this level
      */
-    public Level(String map, Player player) {
+    public Level(String map, Player player, int count) {
+
+        // Get waves text file
+        {
+            try {
+                wave_list = Files.readAllLines(Paths.get(
+                        Sprite.getCurPath() + "res/levels/wavesOfLevel"+count+".txt"),
+                                    StandardCharsets.UTF_8);
+                System.out.println(wave_list);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.maxWaves = Integer.parseInt(Arrays.asList(wave_list.get(wave_list.size() - 1).split(",")).get(0));
+
         //initialise the map, waves of current level
         this.map = new TiledMap(map);
         this.currWave = 1;
