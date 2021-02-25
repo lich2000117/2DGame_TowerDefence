@@ -173,7 +173,13 @@ public class Level {
             this.currWave ++;
         }
 
-        //notify observers if any changes occurs
+        //update upgrade panel, upgrade function
+        if (input.wasPressed(MouseButtons.LEFT)&&(!placing)){
+            // UpgradeExistTower
+        }
+
+
+        //notify observers if any change occurs
         notifyObserver();
         return true;
     }
@@ -318,6 +324,59 @@ public class Level {
     public void setBuyPanel(BuyPanel buyPanel){
         this.buyPanel = buyPanel;
     }
+
+
+
+    /**
+     *
+     * check if we can add a new defender at current position
+     *
+     * @return null if no tower selected, tower pointer if can place
+     */
+    public Tower getTowerAtMouse(Point point){
+        //check if intersects with other defenders
+        for (int i = defenders.size() - 1; i >= 0; i--) {
+            Tower s = defenders.get(i);
+            if (s.getRect().intersects(point)) {
+                return s;
+            }
+        }
+        System.out.println("Level, line 338, cannot return tower at mouse position, placing status:");
+        System.out.println(placing);
+        return null;
+    }
+
+    /**
+     * upgrade an existing defender
+     *
+     * @param tower a tower ready to be upgraded
+     * @return return true if successfully placed a defender
+     */
+    public boolean upgradeExistTower(Tower tower){
+        //tower.getCenter();
+        if (currSelection == TANK) {
+            Tower newTank = new Tank(tower.getCenter());
+            if (player.deductMoney(newTank.getCost())) {
+                defenders.add(newTank);
+                return true;
+            }
+        } else if (currSelection == SUPERTANK) {
+            Tower newTank = new SuperTank(point);
+            if (player.deductMoney(newTank.getCost())) {
+                defenders.add(newTank);
+                return true;
+            }
+        } else if (currSelection == AIRSUPPORT) {
+            AirSupport airSupport = new AirSupport(point);
+            if (player.deductMoney(airSupport.getCost())) {
+                airSupports.add(airSupport);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
 
 
