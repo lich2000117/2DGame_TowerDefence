@@ -111,9 +111,9 @@ public class WaveEvent{
         }
 
         //if finish current wave event reset wave status and return false,move on to the next wave
-        if ((spawnedSlicers == maxEnemy) && (!delayWave) && (enemies.size() == 0)) {
+        if ((spawnedSlicers == maxEnemy) && (!delayWave)) {
             isFinished = true;
-        }
+        }d
 
         // Update all sprites, and remove them if they've finished
         for (int i = enemies.size() - 1; i >= 0; i--) {
