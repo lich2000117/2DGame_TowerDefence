@@ -1,6 +1,7 @@
 import bagel.*;
 import bagel.util.Colour;
 import bagel.util.Point;
+import bagel.util.Rectangle;
 
 /**
  *
@@ -85,24 +86,17 @@ public class UpgradePanel extends Observer{
     private void drawPrice(){
         //draw list of items' price:
         if (wallet >= TANK_PRICE){
-            listFont.drawString(DOLLAR+ TANK_PRICE, INI_WIDTH/2, panelImg.getHeight()/2 + 40, GREEN);
+            listFont.drawString(DOLLAR+ TANK_PRICE, panelLocation.x/3, panelImg.getHeight()/4 + 50, GREEN);
         }
         else {
-            listFont.drawString(DOLLAR + TANK_PRICE, INI_WIDTH/2, panelImg.getHeight()/2 + 40, RED);
+            listFont.drawString(DOLLAR + TANK_PRICE, panelLocation.x/3, panelImg.getHeight()/4 + 50, RED);
         }
 
         if (wallet >= SUPERTANK_PRICE){
-            listFont.drawString(DOLLAR+SUPERTANK_PRICE, INI_WIDTH/2 + GAP, panelImg.getHeight()/2 + 40, GREEN);
+            listFont.drawString(DOLLAR+SUPERTANK_PRICE, panelLocation.x/3, panelImg.getHeight()/2 + 50, GREEN);
         }
         else {
-            listFont.drawString(DOLLAR +SUPERTANK_PRICE, INI_WIDTH/2 + GAP, panelImg.getHeight()/2 + 40, RED);
-        }
-
-        if (wallet >= AIRSUPPORT_PRICE){
-            listFont.drawString(DOLLAR+AIRSUPPORT_PRICE, INI_WIDTH/2 + GAP*2, panelImg.getHeight()/2 + 40, GREEN);
-        }
-        else {
-            listFont.drawString(DOLLAR + Integer.toString(AIRSUPPORT_PRICE), INI_WIDTH/2 + GAP*2, panelImg.getHeight()/2 + 40, RED);
+            listFont.drawString(DOLLAR +SUPERTANK_PRICE, panelLocation.x/3, panelImg.getHeight()/2 + 50, RED);
         }
     }
 
@@ -150,9 +144,6 @@ public class UpgradePanel extends Observer{
         tankImg.draw(panelLocation.x, panelImg.getHeight()/4);
         superTankImg.draw(panelLocation.x, panelImg.getHeight()/2);
 
-        //draw money in Wallet:
-        moneyFont.drawString(DOLLAR+wallet, panelImg.getWidth()-200, WALLET_Y);
-
         //draw Price and Key binding messages
         drawPrice();
         drawKeyBinds();
@@ -160,11 +151,6 @@ public class UpgradePanel extends Observer{
         //if clicked, get selected item and drawing hovering image:
         selectItem(input);
         Point mousePos = new Point(input.getMouseX(), input.getMouseY());
-        //check if current location is valid and can be placed
-        if ((placing == true)&&(checkMouse(mousePos)&&(this.level.canPlace(mousePos))))  {
-            //notify level class that we are currently placing
-            this.level.setPlacing(placing);
-        }
     }
 
     /**
@@ -175,45 +161,24 @@ public class UpgradePanel extends Observer{
         if(input.wasPressed(MouseButtons.LEFT)){
             Point mousePos = new Point(input.getMouseX(), input.getMouseY());
             //check if currently selecting tank, super tank or air_support by monitoring mouse center
-            if (tankImg.getBoundingBoxAt(new Point(INI_WIDTH,
-                    panelImg.getHeight()/2-10)).intersects(mousePos)){
+            if (tankImg.getBoundingBoxAt(new Point(panelLocation.x, panelImg.getHeight()/4)).intersects(mousePos)){
                 //if have sufficient money ot purchase, then select
                 if (wallet>=TANK_PRICE) {
-                    this.level.setCurrSelection("tank");
-                    placing = true;
+                    System.out.println("sucessfully purchase tank upgrade");
                     //set image displays upon hovering
                 }
             }
-            else if (superTankImg.getBoundingBoxAt(new Point(INI_WIDTH+GAP,
-                    panelImg.getHeight()/2-10)).intersects(mousePos)){
+            else if (superTankImg.getBoundingBoxAt(new Point(panelLocation.x, panelImg.getHeight()/2)).intersects(mousePos)){
                 if (wallet>=SUPERTANK_PRICE) {
-                    this.level.setCurrSelection("supertank");
-                    placing = true;
+                    System.out.println("sucessfully purchase supertank upgrade");
+                    Tower superTank = new SuperTank(this.selectedTower.getCenter());
+                    this.level.replaceTower(this.selectedTower, superTank);
                 }
             }
         }
     }
 
-    /**
-     * check if mouse position is in frame.
-     *
-     * @param point current mouse position
-     * @return true if current point is valid.
-     */
-    private boolean checkMouse(Point point){
-        if ((point.x<ShadowDefend.WIDTH)&&(point.y<ShadowDefend.HEIGHT)&&(point.x>=0)&&(point.y>=0)){
-            return true;
-        }
-        return false;
+    public Rectangle getUpgradeRectangle() {
+        return panelImg.getBoundingBoxAt(panelLocation);
     }
-
-    /**
-     * Set current placing status
-     *
-     * @param bool true if it's placing, false if not.
-     */
-    public void setPlacing(boolean bool){
-        placing = bool;
-    }
-
 }

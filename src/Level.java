@@ -208,15 +208,12 @@ public class Level {
      *
      * **/
     private void checkAndCloseUpgradePanel(Point point){
-        if (this.upgradePanel!=null){
+        if (this.upgradePanel!=null) {
             // check if intersects with panels
-            for (int i = panelRects.size() - 1; i >= 0; i--) {
-                Rectangle r = panelRects.get(i);
-                if (!r.intersects(point)){
-                    //remove bound boxes as well
-                    this.upgradePanel = null;
-                    this.upgrading = false;
-                }
+            if (!this.upgradePanel.getUpgradeRectangle().intersects(point)) {
+                //remove bound boxes as well
+                this.upgradePanel = null;
+                this.upgrading = false;
             }
         }
     }
@@ -391,29 +388,11 @@ public class Level {
      * @param upgradedTower a new upgraded tower
      * @return return true if successfully placed a defender
      */
-    public boolean upgradeExistTower(Tower baseTower, Tower upgradedTower){
-        /*Tower newTank = new Tank(baseTower.getCenter());
-        if (player.deductMoney(newTank.getCost())) {
-            defenders.add(newTank);
-            return true;
+    public void replaceTower(Tower baseTower, Tower upgradedTower){
+        if (player.deductMoney(upgradedTower.getCost())) {
+            defenders.remove(baseTower);
+            defenders.add(upgradedTower);
         }
-        return false;*/
-
-        if (currSelection == TANK) {
-            Tower newTank = new SuperTank(baseTower.getCenter());
-            if (player.deductMoney(newTank.getCost())) {
-                defenders.add(newTank);
-                return true;
-            }
-        } else if (currSelection == SUPERTANK) {
-            Tower newTank = new Tank(baseTower.getCenter());
-            if (player.deductMoney(newTank.getCost())) {
-                defenders.add(newTank);
-                return true;
-            }
-        }
-        return false;
-
     }
 
 

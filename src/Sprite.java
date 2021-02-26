@@ -80,6 +80,10 @@ public abstract class Sprite {
         this.rect = this.image.getBoundingBoxAt(point);
     }
 
+    public Image getImage() {
+        return image;
+    }
+
     /**
      * Updates the Sprite. Default behaviour is to render the Sprite at its current position.
      */
