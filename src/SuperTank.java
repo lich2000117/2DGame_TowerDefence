@@ -25,7 +25,7 @@ public class SuperTank extends Tower{
      *
      */
     public SuperTank(Point point) {
-        super(point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN);
+        super(point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, null);
     }
 
     @Override

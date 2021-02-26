@@ -19,6 +19,7 @@ public abstract class Tower extends Sprite{
     private static final String TANK = "TANK";
     private static final String SUPERTANK = "SUPERTANK";
     private String NAME;
+    private Tower nextTower;
 
     /**
      * Create a new Tower
@@ -30,12 +31,13 @@ public abstract class Tower extends Sprite{
      * @param radius radius of damage
      * @param coolDownDelay delay of cooling down
      */
-    public Tower(Point point, String imageSrc, int damage, int cost, int radius, double coolDownDelay) {
+    public Tower(Point point, String imageSrc, int damage, int cost, int radius, double coolDownDelay, Tower nextTower) {
         super(point, imageSrc, damage);
         this.cost = cost;
         this.radius = radius;
         this.damage = damage;
         this.coolDownDelay = coolDownDelay/1000;
+        this.nextTower = nextTower;
     }
 
     /**
@@ -136,5 +138,9 @@ public abstract class Tower extends Sprite{
 
     public String getNAME() {
         return NAME;
+    }
+
+    public Tower getNextTower() {
+        return nextTower;
     }
 }

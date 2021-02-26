@@ -209,15 +209,21 @@ public class Level {
      * **/
     private void checkAndCloseUpgradePanel(Point point){
         if (this.upgradePanel!=null) {
-            // check if intersects with panels
+            // check if intersects with panels and remove upgrade panel
             if (!this.upgradePanel.getUpgradeRectangle().intersects(point)) {
-                //remove bound boxes as well
                 this.upgradePanel = null;
                 this.upgrading = false;
             }
         }
     }
 
+    /**
+     * reset upgraded panel status to prevent duplicated upgrade
+     */
+    public void resetUpgradeStatus(Tower updatedTower) {
+        this.upgradePanel = null;
+        this.upgradePanel = new UpgradePanel(player, this, updatedTower);
+    }
 
     /**
      * add a new defender
@@ -389,10 +395,11 @@ public class Level {
      * @return return true if successfully placed a defender
      */
     public void replaceTower(Tower baseTower, Tower upgradedTower){
-        if (player.deductMoney(upgradedTower.getCost())) {
+        if (player.deductMoney(upgradedTower.getCost()/2)) {
             defenders.remove(baseTower);
             defenders.add(upgradedTower);
         }
+        resetUpgradeStatus(upgradedTower);
     }
 
 
