@@ -35,6 +35,7 @@ public class Level {
     private Player player;
     private int currWave;
     private BuyPanel buyPanel;
+    private UpgradePanel upgradePanel;
 
     //max Wave is the first integer of last line, so use following methods
     private int maxWaves;
@@ -47,6 +48,7 @@ public class Level {
     private List<Observer> observers = new ArrayList<Observer>();
     private String currSelection;
     private boolean placing = false;
+    private boolean upgrading = false;
 
     /**
      * Construct a Level with corresponding map
@@ -153,11 +155,6 @@ public class Level {
             }
         }
 
-        //placing towers on current level
-        if (input.wasPressed(MouseButtons.LEFT)&&(placing)){
-            this.placing = !addDefender(input);
-            this.buyPanel.setPlacing(this.placing);
-        }
 
         //update current wave, check if we finish current wave
         if (!wave.update(input)){
@@ -173,16 +170,57 @@ public class Level {
             this.currWave ++;
         }
 
+
         //update upgrade panel, upgrade function
-        if (input.wasPressed(MouseButtons.LEFT)&&(!placing)){
-            // UpgradeExistTower
+        if ((!placing)&&(input.wasPressed(MouseButtons.LEFT))){
+            Point point = new Point(input.getMouseX(),input.getMouseY());
+            Tower selectedTower = getTowerAtMouse(point);
+            if ((selectedTower!=null)&&(!upgrading)) {
+                this.upgradePanel = new UpgradePanel(player, this, selectedTower);
+                upgrading = true;
+                // UpgradeExistTower
+            }
+            else if (upgrading){
+                //upgrade panel and if click outside, destroy it.
+                checkAndCloseUpgradePanel(point);
+            }
+        }
+        if (this.upgradePanel!=null){
+            this.upgradePanel.update(input);
         }
 
+
+
+        //placing towers on current level
+        if (input.wasPressed(MouseButtons.LEFT)&&(placing)){
+            this.placing = !addDefender(input);
+            this.buyPanel.setPlacing(this.placing);
+        }
 
         //notify observers if any change occurs
         notifyObserver();
         return true;
     }
+
+
+    /**
+     * Check if user wants to close upgrade panel
+     *
+     * **/
+    private void checkAndCloseUpgradePanel(Point point){
+        if (this.upgradePanel!=null){
+            // check if intersects with panels
+            for (int i = panelRects.size() - 1; i >= 0; i--) {
+                Rectangle r = panelRects.get(i);
+                if (!r.intersects(point)){
+                    //remove bound boxes as well
+                    this.upgradePanel = null;
+                    this.upgrading = false;
+                }
+            }
+        }
+    }
+
 
     /**
      * add a new defender
@@ -349,31 +387,33 @@ public class Level {
     /**
      * upgrade an existing defender
      *
-     * @param tower a tower ready to be upgraded
+     * @param baseTower a tower ready to be upgraded
+     * @param upgradedTower a new upgraded tower
      * @return return true if successfully placed a defender
      */
-    public boolean upgradeExistTower(Tower tower){
-        //tower.getCenter();
+    public boolean upgradeExistTower(Tower baseTower, Tower upgradedTower){
+        /*Tower newTank = new Tank(baseTower.getCenter());
+        if (player.deductMoney(newTank.getCost())) {
+            defenders.add(newTank);
+            return true;
+        }
+        return false;*/
+
         if (currSelection == TANK) {
-            Tower newTank = new Tank(tower.getCenter());
+            Tower newTank = new SuperTank(baseTower.getCenter());
             if (player.deductMoney(newTank.getCost())) {
                 defenders.add(newTank);
                 return true;
             }
         } else if (currSelection == SUPERTANK) {
-            Tower newTank = new SuperTank(point);
+            Tower newTank = new Tank(baseTower.getCenter());
             if (player.deductMoney(newTank.getCost())) {
                 defenders.add(newTank);
                 return true;
             }
-        } else if (currSelection == AIRSUPPORT) {
-            AirSupport airSupport = new AirSupport(point);
-            if (player.deductMoney(airSupport.getCost())) {
-                airSupports.add(airSupport);
-                return true;
-            }
         }
         return false;
+
     }
 
 

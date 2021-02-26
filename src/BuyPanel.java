@@ -35,7 +35,6 @@ public class BuyPanel extends Observer{
     private static final int KEY_SIZE = 15;
 
     // objects needed for rendering
-    private final Rectangle rect;
     private final Image panelImg;
     private final Image tankImg;
     private final Image superTankImg;
@@ -53,7 +52,6 @@ public class BuyPanel extends Observer{
     private Level level;
     private Image currSelection;
     private static boolean placing = false;
-    private static boolean rectAddedToLevel = false;
 
 
 
@@ -70,7 +68,6 @@ public class BuyPanel extends Observer{
         this.airSupportImg = new Image(AIRSUPPORT);
         this.superTankImg = new Image(SUPERTANK);
         this.panelLocation = new Point(ShadowDefend.WIDTH / 2, panelImg.getHeight()/2);
-        this.rect = panelImg.getBoundingBoxAt(panelLocation);
         this.level = level;
 
         this.listFont = new Font(FONT_PATH,LIST_SIZE);
@@ -81,6 +78,8 @@ public class BuyPanel extends Observer{
         this.player.attach(this);
         this.level.attach(this);
         this.level.setBuyPanel(this);
+        // add the current panel's rectangle to level for boundary use.
+        this.level.addPanelRects(panelImg.getBoundingBoxAt(panelLocation));
     }
 
     /**
@@ -128,11 +127,6 @@ public class BuyPanel extends Observer{
      */
     public void updateInfo(){
         wallet = player.getMoney();
-        //if already added, do not add in repeat
-        if (!rectAddedToLevel) {
-            // add the current panel's rectangle to level for boundary use.
-            this.level.addPanelRects(rect);
-        }
     }
 
     /**reset buy panel with connection to new level if new level reached

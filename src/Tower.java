@@ -18,6 +18,7 @@ public abstract class Tower extends Sprite{
     private double coolDownDelay;
     private static final String TANK = "TANK";
     private static final String SUPERTANK = "SUPERTANK";
+    private String NAME;
 
     /**
      * Create a new Tower
@@ -131,5 +132,9 @@ public abstract class Tower extends Sprite{
 
     public int getRadius() {
         return radius;
+    }
+
+    public String getNAME() {
+        return NAME;
     }
 }

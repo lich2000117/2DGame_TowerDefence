@@ -42,7 +42,6 @@ public class ShadowDefend extends AbstractGame {
     private Level currLevel;
     private StatusPanel statusPanel;
     private BuyPanel buyPanel;
-    private UpgradePanel upgradePanel;
     private Player player;
 
     /**
@@ -65,7 +64,6 @@ public class ShadowDefend extends AbstractGame {
         //initialize panels
         this.statusPanel = new StatusPanel(player, currLevel);
         this.buyPanel = new BuyPanel(player, currLevel);
-        this.upgradePanel = new UpgradePanel(player, currLevel);
     }
 
     /**
@@ -153,7 +151,6 @@ public class ShadowDefend extends AbstractGame {
         //render status and buy panel
         statusPanel.update(getTimescale());
         buyPanel.update(input);
-        upgradePanel.update(input);
     }
 
 }

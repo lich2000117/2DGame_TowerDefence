@@ -1,7 +1,6 @@
 import bagel.*;
 import bagel.util.Colour;
 import bagel.util.Point;
-import bagel.util.Rectangle;
 
 /**
  *
@@ -17,7 +16,6 @@ public class UpgradePanel extends Observer{
     private static final String PANEL = Sprite.getCurPath() + "res/images/upgradepanel.png";
     private static final String TANK = Sprite.getCurPath() + "res/images/tank.png";
     private static final String SUPERTANK = Sprite.getCurPath() + "res/images/supertank.png";
-    private static final String AIRSUPPORT = Sprite.getCurPath() + "res/images/airsupport.png";
     private static final String FONT_PATH = Sprite.getCurPath() + "res/fonts/DejaVuSans-Bold.ttf";
 
     //basic information for rendering:
@@ -28,6 +26,7 @@ public class UpgradePanel extends Observer{
     private static final int GAP = 120;
     private static final int WALLET_Y = 65;
     private int wallet;
+    private Tower selectedTower;
 
     //Different Font Size:
     private static final int WALLET_SIZE = 50;
@@ -35,11 +34,9 @@ public class UpgradePanel extends Observer{
     private static final int KEY_SIZE = 15;
 
     // objects needed for rendering
-    private final Rectangle rect;
     private final Image panelImg;
     private final Image tankImg;
     private final Image superTankImg;
-    private final Image airSupportImg;
 
     //font information and colours
     private final Font listFont;
@@ -51,9 +48,7 @@ public class UpgradePanel extends Observer{
     //for rendering hovering function
     private Point panelLocation;
     private Level level;
-    private Image currSelection;
     private static boolean placing = false;
-    private static boolean rectAddedToLevel = false;
 
 
 
@@ -64,13 +59,11 @@ public class UpgradePanel extends Observer{
      * @param level is the current level connected to
      *
      */
-    public UpgradePanel(Player player, Level level) {
+    public UpgradePanel(Player player, Level level, Tower selectedTower) {
         this.panelImg = new Image(PANEL);
         this.tankImg = new Image(TANK);
-        this.airSupportImg = new Image(AIRSUPPORT);
         this.superTankImg = new Image(SUPERTANK);
         this.panelLocation = new Point(panelImg.getWidth()/2, panelImg.getHeight()/2);
-        this.rect = panelImg.getBoundingBoxAt(panelLocation);
         this.level = level;
 
         this.listFont = new Font(FONT_PATH,LIST_SIZE);
@@ -80,6 +73,7 @@ public class UpgradePanel extends Observer{
         this.player = player;
         this.player.attach(this);
         this.level.attach(this);
+        this.selectedTower = selectedTower;
         //this.level.setBuyPanel(this);
     }
 
@@ -129,10 +123,6 @@ public class UpgradePanel extends Observer{
     public void updateInfo(){
         wallet = player.getMoney();
         //if already added, do not add in repeat
-        if (!rectAddedToLevel) {
-            // add the current panel's rectangle to level for boundary use.
-            this.level.addPanelRects(rect);
-        }
     }
 
     /**reset buy panel with connection to new level if new level reached
@@ -157,9 +147,8 @@ public class UpgradePanel extends Observer{
         panelImg.draw(panelLocation.x, panelLocation.y);
 
         //draw object images:
-        tankImg.draw(INI_WIDTH, panelImg.getHeight()/2-10);
-        superTankImg.draw(INI_WIDTH+GAP, panelImg.getHeight()/2-10);
-        airSupportImg.draw(INI_WIDTH+GAP*2, panelImg.getHeight()/2-10);
+        tankImg.draw(panelLocation.x, panelImg.getHeight()/4);
+        superTankImg.draw(panelLocation.x, panelImg.getHeight()/2);
 
         //draw money in Wallet:
         moneyFont.drawString(DOLLAR+wallet, panelImg.getWidth()-200, WALLET_Y);
@@ -173,7 +162,6 @@ public class UpgradePanel extends Observer{
         Point mousePos = new Point(input.getMouseX(), input.getMouseY());
         //check if current location is valid and can be placed
         if ((placing == true)&&(checkMouse(mousePos)&&(this.level.canPlace(mousePos))))  {
-            drawCursor(mousePos, currSelection);
             //notify level class that we are currently placing
             this.level.setPlacing(placing);
         }
@@ -194,7 +182,6 @@ public class UpgradePanel extends Observer{
                     this.level.setCurrSelection("tank");
                     placing = true;
                     //set image displays upon hovering
-                    this.currSelection = tankImg;
                 }
             }
             else if (superTankImg.getBoundingBoxAt(new Point(INI_WIDTH+GAP,
@@ -202,32 +189,9 @@ public class UpgradePanel extends Observer{
                 if (wallet>=SUPERTANK_PRICE) {
                     this.level.setCurrSelection("supertank");
                     placing = true;
-                    this.currSelection = superTankImg;
-                }
-            }
-            else if (airSupportImg.getBoundingBoxAt(new Point(INI_WIDTH+GAP*2,
-                    panelImg.getHeight()/2-10)).intersects(mousePos)) {
-                if (wallet >= AIRSUPPORT_PRICE) {
-                    this.level.setCurrSelection("airsupport");
-                    placing = true;
-                    this.currSelection = airSupportImg;
                 }
             }
         }
-        //de-select item if right button is clicked
-        else if (input.wasPressed(MouseButtons.RIGHT)){
-            placing = false;
-            this.level.setPlacing(false);
-        }
-    }
-
-    /**
-     * draw target Image at the cursor position
-     * @param point point drawing at
-     * @param image image that to be drawing
-     */
-    private void drawCursor(Point point, Image image){
-        image.draw(point.x,point.y);
     }
 
     /**
@@ -251,4 +215,5 @@ public class UpgradePanel extends Observer{
     public void setPlacing(boolean bool){
         placing = bool;
     }
+
 }
