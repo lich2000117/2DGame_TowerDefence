@@ -23,7 +23,6 @@ public class BuyPanel extends Observer{
     //basic information for rendering:
     private static final int TANK_PRICE = 250;
     private static final int SUPERTANK_PRICE = 500;
-    private static final int AIRSUPPORT_PRICE = 500;
     private static final int INI_WIDTH = 64;
     private static final int GAP = 120;
     private static final int WALLET_Y = 65;
@@ -103,11 +102,11 @@ public class BuyPanel extends Observer{
             listFont.drawString(DOLLAR +SUPERTANK_PRICE, INI_WIDTH/2 + GAP, panelImg.getHeight()/2 + 40, RED);
         }
 
-        if (wallet >= AIRSUPPORT_PRICE){
-            listFont.drawString(DOLLAR+AIRSUPPORT_PRICE, INI_WIDTH/2 + GAP*2, panelImg.getHeight()/2 + 40, GREEN);
+        if (wallet >= AirSupport.getAirSupCost()){
+            listFont.drawString(DOLLAR+AirSupport.getAirSupCost(), INI_WIDTH/2 + GAP*2, panelImg.getHeight()/2 + 40, GREEN);
         }
         else {
-            listFont.drawString(DOLLAR + Integer.toString(AIRSUPPORT_PRICE), INI_WIDTH/2 + GAP*2, panelImg.getHeight()/2 + 40, RED);
+            listFont.drawString(DOLLAR + Integer.toString(AirSupport.getAirSupCost()), INI_WIDTH/2 + GAP*2, panelImg.getHeight()/2 + 40, RED);
         }
     }
 
@@ -201,7 +200,7 @@ public class BuyPanel extends Observer{
             }
             else if (airSupportImg.getBoundingBoxAt(new Point(INI_WIDTH+GAP*2,
                     panelImg.getHeight()/2-10)).intersects(mousePos)) {
-                if (wallet >= AIRSUPPORT_PRICE) {
+                if (wallet >= AirSupport.getAirSupCost()) {
                     this.level.setCurrSelection("airsupport");
                     placing = true;
                     this.currSelection = null;

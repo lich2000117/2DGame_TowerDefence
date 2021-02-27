@@ -1,8 +1,8 @@
 1,spawn,5,slicer,1000
 1,delay,500
-1,spawn,10,slicer,700
-1,delay,1000
-1,spawn,20,slicer,500
+1,spawn,5,slicer,850
+1,delay,1500
+1,spawn,5,slicer,750
 2,spawn,5,superslicer,1000
 2,delay,1500
 2,spawn,20,slicer,500
@@ -28,7 +28,7 @@
 4,delay,1500
 4,spawn,40,slicer,500
 4,spawn,5,megaslicer,700
-4,spawn,5,apexslicer,700
+4,spawn,10,apexslicer,700
 5,spawn,10,megaslicer,600
 5,spawn,15,superslicer,1000
 5,delay,1000
@@ -39,6 +39,7 @@
 5,spawn,35,megaslicer,400
 5,spawn,40,slicer,300
 5,spawn,30,megaslicer,400
+5,spawn,20,apexslicer,400
 5,spawn,40,slicer,300
 6,spawn,30,superslicer,400
 6,spawn,40,megaslicer,300

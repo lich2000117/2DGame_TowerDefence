@@ -15,7 +15,7 @@ public class AirSupport extends Tower{
 
     private static final int DAMAGE = 500;
     private static final int SPEED = 3;
-    private static final int COST = 500;
+    private static int COST = 500;
     private static final int RADIUS = 10;
     private static final String IMAGE = Sprite.getCurPath() + "res/images/airsupport.png";
     private static boolean direction = true;
@@ -49,6 +49,7 @@ public class AirSupport extends Tower{
         currentPoint = getCenter();
         //everytime we create an airplane, its direction changes
         this.direction = !direction;
+        this.COST += 100;
     }
 
 
@@ -74,10 +75,12 @@ public class AirSupport extends Tower{
             Bomb b = bombs.get(i);
             if (b.isDetonated()){
                 bombs.remove(i);
-                allDetonated = true;
+            }
+            if(bombs.isEmpty()){
+                allDetonated=true;
             }
             else{
-                allDetonated = false;
+                allDetonated=false;
             }
             b.update(input);
         }
@@ -128,7 +131,7 @@ public class AirSupport extends Tower{
         return bombs;
     }
 
-    public int getCost() {
+    public static int getAirSupCost() {
         return COST;
     }
 

@@ -1,4 +1,6 @@
+import bagel.Drawing;
 import bagel.Input;
+import bagel.util.Colour;
 import bagel.util.Point;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public abstract class Tower extends Sprite{
     private static final String TANK = "TANK";
     private static final String SUPERTANK = "SUPERTANK";
     private Tower nextTower;
+    private boolean showRange = false;
 
     /**
      * Create a new Tower
@@ -48,7 +51,7 @@ public abstract class Tower extends Sprite{
      */
     public void update(Input input, List<Projectile> projectiles, String towerName) {
         coolDownCount += ShadowDefend.getTimescale();
-
+        if (showRange) drawRange();
         //if doesn't have a target for our tower, set one.
         if (target != null) {
             Projectile newProjectile = getProjectileType(towerName);
@@ -87,6 +90,7 @@ public abstract class Tower extends Sprite{
         }
         //double render to avoid framerate drop.
         super.update(input);
+        showRange = false;
     }
 
     /**
@@ -130,6 +134,13 @@ public abstract class Tower extends Sprite{
     }
 
     /**
+     * Draw Attack Range
+     * **/
+    public void drawRange(){
+        Drawing.drawCircle(this.getCenter(),this.getRadius(), new Colour(200,200,54,0.5));
+    }
+
+    /**
      * Getters
      *
      */
@@ -147,5 +158,9 @@ public abstract class Tower extends Sprite{
 
     public double getFireRate() {
         return 1/this.coolDownDelay;
+    }
+
+    public void setShowRange(boolean showRange) {
+        this.showRange = showRange;
     }
 }

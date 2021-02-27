@@ -124,7 +124,7 @@ public class UpgradePanel extends Observer{
      */
     protected void update(Input input) {
         //Draw Tower's range as a circle
-        Drawing.drawCircle(selectedTower.getCenter(),selectedTower.getRadius(), new Colour(200,200,54,0.5));
+        selectedTower.setShowRange(true);
         //draw panel
         panelImg.draw(panelLocation.x, panelLocation.y);
         //draw object images:
