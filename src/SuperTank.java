@@ -11,8 +11,8 @@ import java.util.List;
 public class SuperTank extends Tower{
 
     private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/supertank.png";
-    private static final int DAMAGE = 2;
-    private static final int COST = 400;
+    private static final int DAMAGE = 20;
+    private static final int COST = 500;
     private static final int RADIUS = 130;
     private static final Double COOLDOWN = 700.0;
     private static final String NAME = "SUPERTANK";
@@ -25,7 +25,7 @@ public class SuperTank extends Tower{
      *
      */
     public SuperTank(Point point) {
-        super(point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, new MegaTank(point));
+        super(NAME, point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, new MegaTank(point));
     }
 
     @Override

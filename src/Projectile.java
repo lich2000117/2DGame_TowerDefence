@@ -10,20 +10,19 @@ public abstract class Projectile extends Sprite{
 
     private Enemy enemy;
     private boolean finished = false;
-    private double speed;
+    private double speed = 5;
     private Point currentPoint;     //current point if someone died here
     private Point targetPoint;
+    private String NAME;
 
     /**
      * Creates a new projectile
      *
      *
      * @param imageSrc The image which will be rendered at the entity's point
-     * @param damage
      */
-    public Projectile(Point fromPoint, Enemy enemy, String imageSrc, int damage, double speed) {
-        super(fromPoint, imageSrc, damage);
-        this.speed = speed;
+    public Projectile(String NAME, Point fromPoint, Enemy enemy, String imageSrc) {
+        super(NAME, fromPoint, imageSrc, 0);
         this.enemy = enemy;
     }
 

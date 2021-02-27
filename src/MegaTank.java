@@ -11,11 +11,11 @@ import java.util.List;
 public class MegaTank extends Tower{
 
     private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/megatank.png";
-    private static final int DAMAGE = 3;
-    private static final int COST = 700;
+    private static final int DAMAGE = 30;
+    private static final int COST = 800;
     private static final int RADIUS = 150;
     private static final Double COOLDOWN = 500.0;
-    private static final String NAME = "SUPERTANK";
+    private static final String NAME = "MEGATANK";
     private List<Projectile> projectiles = new ArrayList<Projectile>();
 
     /**
@@ -25,7 +25,7 @@ public class MegaTank extends Tower{
      *
      */
     public MegaTank(Point point) {
-        super(point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, new ApexTank(point));
+        super(NAME, point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, new ApexTank(point));
     }
 
     @Override

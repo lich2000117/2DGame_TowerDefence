@@ -17,6 +17,7 @@ public abstract class Sprite {
     private Rectangle rect;
     private double angle;
     private int damage;
+    private String NAME;
 
 
     /**
@@ -25,11 +26,12 @@ public abstract class Sprite {
      * @param point    The starting point for the entity
      * @param imageSrc The image which will be rendered at the entity's point
      */
-    public Sprite(Point point, String imageSrc, int damage) {
+    public Sprite(String NAME, Point point, String imageSrc, int damage) {
         this.image = new Image(imageSrc);
         this.rect = image.getBoundingBoxAt(point);
         this.angle = 0;
         this.damage = damage;
+        this.NAME = NAME;
     }
 
     //private static File f = new File(System.getProperty("java.class.path"));
@@ -82,6 +84,10 @@ public abstract class Sprite {
 
     public Image getImage() {
         return image;
+    }
+
+    public String getNAME() {
+        return NAME;
     }
 
     /**

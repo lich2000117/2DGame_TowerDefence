@@ -11,7 +11,7 @@ public class Slicer extends Enemy {
     private static final double SPEED = 1;
     private static final int DAMAGE = 1;
     private static final int REWARD = 2;
-    private static final int HEALTH = 1;
+    private static final int HEALTH = 20;
 
     /**
      * Creates a new Slicer

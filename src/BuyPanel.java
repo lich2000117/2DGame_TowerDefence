@@ -22,7 +22,7 @@ public class BuyPanel extends Observer{
 
     //basic information for rendering:
     private static final int TANK_PRICE = 250;
-    private static final int SUPERTANK_PRICE = 600;
+    private static final int SUPERTANK_PRICE = 500;
     private static final int AIRSUPPORT_PRICE = 500;
     private static final int INI_WIDTH = 64;
     private static final int GAP = 120;
@@ -115,8 +115,8 @@ public class BuyPanel extends Observer{
      * draw key binding settings
      */
     private void drawKeyBinds() {
-        keyFont.drawString("Key binds: \n\nS - Start Wave\nL - Increase TimeScale\nK - Decrease TimeScale",
-                panelImg.getWidth() / 2-40, 20);
+        keyFont.drawString("Key Binds: \n\nS - Start Wave\nL - Increase TimeScale\nK - Decrease TimeScale\nClick Tower to BUY & UPGRADE",
+                panelImg.getWidth() / 2-50, 20);
 
     }
 

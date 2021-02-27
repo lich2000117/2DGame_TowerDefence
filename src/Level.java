@@ -21,8 +21,8 @@ public class Level {
     //since the input is always valid, downcasting
     private List<String> wave_list = Collections.EMPTY_LIST;
 
-    private static final int BASE_WAVE_AWARD = 100;
-    private static final int BONUS_WAVE_AWARD = 100;
+    private static final int BASE_WAVE_AWARD = 500;
+    private static final int BONUS_WAVE_AWARD = 500;
     private static final String TANK = "tank";
     private static final String SUPERTANK = "supertank";
     private static final String AIRSUPPORT = "airsupport";
@@ -395,8 +395,8 @@ public class Level {
      * @param upgradedTower a new upgraded tower
      * @return return true if successfully placed a defender
      */
-    public void replaceTower(Tower baseTower, Tower upgradedTower){
-        if (player.deductMoney(upgradedTower.getCost()/2)) {
+    public void replaceTower(Tower baseTower, Tower upgradedTower, int Cost){
+        if (player.deductMoney(Cost)) {
             defenders.remove(baseTower);
             defenders.add(upgradedTower);
         }

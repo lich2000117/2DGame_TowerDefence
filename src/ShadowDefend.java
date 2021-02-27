@@ -27,7 +27,7 @@ public class ShadowDefend extends AbstractGame {
     public static final Keys START_WAVE = Keys.S;
     //set up the maximum levels have here
     public static final int MAX_LEVELS = 2;
-    private static final int START_MONEY = 6000;
+    private static final int START_MONEY = 400;
     private static final int START_HEALTH = 25;
 
     // The spawn delay (in seconds) to spawn slicers

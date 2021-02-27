@@ -10,8 +10,8 @@ public class MegaSlicer extends Enemy {
     private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/megaslicer.png";
     private static final double SPEED = 0.75;
     private static final int DAMAGE = 4;
-    private static final int REWARD = 10;
-    private static final int HEALTH = 2;
+    private static final int REWARD = 5;
+    private static final int HEALTH = 30;
     private static final int KIDSNUM = 2;
     private List<Point> polyline;
 

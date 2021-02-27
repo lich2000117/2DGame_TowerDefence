@@ -31,7 +31,7 @@ public abstract class Enemy extends Sprite{
      * @param health its health
      */
     public Enemy(List<Point> polyline, Point spawnPoint,  String imageSrc, int damage, double speed, int reward, int health) {
-        super(spawnPoint, imageSrc, damage);
+        super("Enemy", spawnPoint, imageSrc, damage);
         this.polyline = polyline;
         if (this.polyline.size()==1){
             this.targetPointIndex = 0;

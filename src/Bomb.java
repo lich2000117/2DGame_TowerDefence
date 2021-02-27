@@ -20,7 +20,7 @@ public class Bomb extends Sprite{
      * @param point    The starting point for the entity
      */
     public Bomb(Point point) {
-        super(point, IMAGE_FILE, DAMAGE);
+        super("Bomb",point, IMAGE_FILE, DAMAGE);
     }
 
     @Override

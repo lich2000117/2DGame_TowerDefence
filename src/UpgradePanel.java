@@ -15,8 +15,6 @@ public class UpgradePanel extends Observer{
     //resource paths:
     private static final String DOLLAR = "$";
     private static final String PANEL = Sprite.getCurPath() + "res/images/upgradepanel.png";
-    private static final String TANK = Sprite.getCurPath() + "res/images/tank.png";
-    private static final String SUPERTANK = Sprite.getCurPath() + "res/images/supertank.png";
     private static final String FONT_PATH = Sprite.getCurPath() + "res/fonts/DejaVuSans-Bold.ttf";
 
     //basic information for rendering:
@@ -26,26 +24,24 @@ public class UpgradePanel extends Observer{
     private Tower selectedTower;
 
     //Different Font Size:
-    private static final int WALLET_SIZE = 50;
-    private static final int LIST_SIZE = 25;
-    private static final int KEY_SIZE = 15;
+    private static final int PRICE_SIZE = 25;
+    private static final int UPGRADE_SIZE = 20;
+    private static final int TEXT_SIZE = 15;
 
     // objects needed for rendering
     private final Image panelImg;
     private Image UpgradeImg;
-    private Image superTankImg;
 
     //font information and colours
-    private final Font listFont;
-    private final Font moneyFont;
-    private final Font keyFont;
+    private final Font priceFont;
+    private final Font upgradeFont;
+    private final Font textFont;
     private final DrawOptions RED = new DrawOptions().setBlendColour(Colour.RED);
     private final DrawOptions GREEN = new DrawOptions().setBlendColour(Colour.GREEN);
 
     //for rendering hovering function
     private Point panelLocation;
     private Level level;
-    private boolean placing = false;
     private static boolean firstCall = true; //to make sure user not missclick upgrade button, set this boolean value
 
 
@@ -59,13 +55,12 @@ public class UpgradePanel extends Observer{
      */
     public UpgradePanel(Player player, Level level, Tower selectedTower) {
         this.panelImg = new Image(PANEL);
-        this.superTankImg = new Image(SUPERTANK);
         this.panelLocation = new Point(panelImg.getWidth()/2, panelImg.getHeight()/2);
         this.level = level;
 
-        this.listFont = new Font(FONT_PATH,LIST_SIZE);
-        this.moneyFont = new Font(FONT_PATH, WALLET_SIZE);
-        this.keyFont = new Font(FONT_PATH, KEY_SIZE);
+        this.priceFont = new Font(FONT_PATH,PRICE_SIZE);
+        this.upgradeFont = new Font(FONT_PATH, UPGRADE_SIZE);
+        this.textFont = new Font(FONT_PATH, TEXT_SIZE);
         this.wallet = player.getMoney();
         this.player = player;
         this.player.attach(this);
@@ -87,30 +82,26 @@ public class UpgradePanel extends Observer{
      * and rendering red if can afford else green.
      *
      */
-    private void drawPrice(){
+    private void drawUpgradeModule(){
+        upgradeFont.drawString("UPGRADE", panelLocation.x/16, panelImg.getHeight()/2);
         //draw list of items' price:
         if (wallet >= Upgrade_PRICE){
-            listFont.drawString(DOLLAR+ Upgrade_PRICE, panelLocation.x/3, panelImg.getHeight()/4 + 50, GREEN);
+            priceFont.drawString(DOLLAR+ Upgrade_PRICE, panelLocation.x/3, panelImg.getHeight()/2 +100, GREEN);
         }
         else {
-            listFont.drawString(DOLLAR + Upgrade_PRICE, panelLocation.x/3, panelImg.getHeight()/4 + 50, RED);
-        }
-
-        if (wallet >= SUPERTANK_PRICE){
-            listFont.drawString(DOLLAR+SUPERTANK_PRICE, panelLocation.x/3, panelImg.getHeight()/2 + 50, GREEN);
-        }
-        else {
-            listFont.drawString(DOLLAR +SUPERTANK_PRICE, panelLocation.x/3, panelImg.getHeight()/2 + 50, RED);
+            priceFont.drawString(DOLLAR + Upgrade_PRICE, panelLocation.x/3, panelImg.getHeight()/2 +100, RED);
         }
     }
 
     /**
      * draw key binding settings
      */
-    private void drawKeyBinds() {
-        keyFont.drawString("Key binds: \n\nS - Start Wave\nL - Increase TimeScale\nK - Decrease TimeScale",
-                panelImg.getWidth() / 2-40, 20);
-
+    private void drawTowerInfo() {
+        textFont.drawString("Name: \n "+this.selectedTower.getNAME()+"\n" +
+                "DMG:   "+this.selectedTower.getDamage()+ "\n" +
+                "Range: "+this.selectedTower.getRadius()+"\n" +
+                "Rate:   "+String.format("%.1f", this.selectedTower.getFireRate())+"\n",
+                panelLocation.x/8, panelImg.getHeight()/4);
     }
 
 
@@ -136,19 +127,17 @@ public class UpgradePanel extends Observer{
         panelImg.draw(panelLocation.x, panelLocation.y);
 
         //draw object images:
-        superTankImg.draw(panelLocation.x, panelImg.getHeight()/2);
-
         // if no next upgrade, don't draw.
         if ((Upgrade_PRICE >= 0 )){
-            UpgradeImg.draw(panelLocation.x, panelImg.getHeight()/4);
-            drawPrice();
+            UpgradeImg.draw(panelLocation.x, panelImg.getHeight()/2 + 50);
+            drawUpgradeModule();
             //check if clicked after the initialize, get selected item and upgrade it:
             if (firstCall==false) {
                 upgradeTower(input);
             }
         }
         //draw Price and Key binding messages
-        drawKeyBinds();
+        drawTowerInfo();
         firstCall = false; //first time initialize without executing buttons
     }
 
@@ -160,11 +149,10 @@ public class UpgradePanel extends Observer{
         if(input.wasPressed(MouseButtons.LEFT)){
             Point mousePos = new Point(input.getMouseX(), input.getMouseY());
             //check if currently selecting tank, super tank or air_support by monitoring mouse center
-            if (UpgradeImg.getBoundingBoxAt(new Point(panelLocation.x, panelImg.getHeight()/4)).intersects(mousePos)){
+            if (UpgradeImg.getBoundingBoxAt(new Point(panelLocation.x, panelImg.getHeight()/2 + 50)).intersects(mousePos)){
                 //if have sufficient money ot purchase, then select
                 if (wallet>=Upgrade_PRICE) {
-                    System.out.println("sucessfully purchase tank upgrade");
-                    this.level.replaceTower(this.selectedTower, this.selectedTower.getNextTower());
+                    this.level.replaceTower(this.selectedTower, this.selectedTower.getNextTower(), Upgrade_PRICE);
                     //set image displays upon hovering
                 }
             }

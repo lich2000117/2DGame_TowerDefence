@@ -2,6 +2,7 @@ import bagel.Input;
 import bagel.util.Point;
 import bagel.util.Vector2;
 
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,7 +35,7 @@ public class AirSupport extends Tower{
      *
      */
     public AirSupport(Point point) {
-        super(point, IMAGE, DAMAGE, COST, RADIUS, MINDELAY, null);
+        super("AirSuport",point, IMAGE, DAMAGE, COST, RADIUS, MINDELAY, null);
         if (direction) {
             updateCenter(new Point(0,getCenter().y));
             // plus 10 here to avoid been stuck at the edge of the window

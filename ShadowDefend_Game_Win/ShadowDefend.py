@@ -76,8 +76,8 @@ class MY_WINDOW():
         positionRight = int(tk_window.winfo_screenwidth()/2 - tk_window.winfo_reqwidth()/2)
         positionDown = int(tk_window.winfo_screenheight()/2 - tk_window.winfo_reqheight()/2)
         # Positions the window in the center of the page.
-        tk_window.geometry("+{}+{}".format(positionRight, positionDown))
-
+        tk_window.geometry("+{}+{}".format(positionRight+tk_window.width/2, positionDown+tk_window.height/2))
+        
     #日志动态打印
     def write_log_to_Text(self,logmsg):
         global LOG_LINE_NUM
@@ -196,7 +196,7 @@ class MY_WINDOW():
             pass_check = False
             factor = 0.01
             for i in range(1, 101):
-                sleep(random.randint(1,5)*factor)
+                sleep(random.randint(1,4)*factor)
                 p.step()
                 if (i<10):
                     s.configure("LabeledProgressbar", text="Initializing... {0} %      ".format(i))
@@ -214,7 +214,7 @@ class MY_WINDOW():
                                 Button(root, command=self.moreHelpWindow, text="Download Java JDK",bg='red').pack()
                                 return False
                 elif (i>50) and (i<75):
-                    factor = 0.02
+                    factor = 0.01
                     s.configure("LabeledProgressbar", text="Loading Game... {0} %      ".format(i))
                 else:
                     factor = 0.005
