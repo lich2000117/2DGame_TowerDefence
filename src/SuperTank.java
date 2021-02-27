@@ -11,10 +11,10 @@ import java.util.List;
 public class SuperTank extends Tower{
 
     private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/supertank.png";
-    private static final int DAMAGE = 3;
-    private static final int COST = 600;
-    private static final int RADIUS = 150;
-    private static final Double COOLDOWN = 500.0;
+    private static final int DAMAGE = 2;
+    private static final int COST = 400;
+    private static final int RADIUS = 130;
+    private static final Double COOLDOWN = 700.0;
     private static final String NAME = "SUPERTANK";
     private List<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -25,7 +25,7 @@ public class SuperTank extends Tower{
      *
      */
     public SuperTank(Point point) {
-        super(point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, null);
+        super(point, IMAGE_FILE, DAMAGE, COST, RADIUS, COOLDOWN, new MegaTank(point));
     }
 
     @Override

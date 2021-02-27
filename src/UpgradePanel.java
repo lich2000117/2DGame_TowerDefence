@@ -45,7 +45,8 @@ public class UpgradePanel extends Observer{
     //for rendering hovering function
     private Point panelLocation;
     private Level level;
-    private static boolean placing = false;
+    private boolean placing = false;
+    private static boolean firstCall = true; //to make sure user not missclick upgrade button, set this boolean value
 
 
 
@@ -138,15 +139,17 @@ public class UpgradePanel extends Observer{
         superTankImg.draw(panelLocation.x, panelImg.getHeight()/2);
 
         // if no next upgrade, don't draw.
-        if (Upgrade_PRICE >= 0 ){
+        if ((Upgrade_PRICE >= 0 )){
             UpgradeImg.draw(panelLocation.x, panelImg.getHeight()/4);
             drawPrice();
-            //if clicked, get selected item:
-            upgradeTower(input);
+            //check if clicked after the initialize, get selected item and upgrade it:
+            if (firstCall==false) {
+                upgradeTower(input);
+            }
         }
         //draw Price and Key binding messages
         drawKeyBinds();
-
+        firstCall = false; //first time initialize without executing buttons
     }
 
     /**
@@ -175,5 +178,9 @@ public class UpgradePanel extends Observer{
 
     public Rectangle getUpgradeRectangle() {
         return panelImg.getBoundingBoxAt(panelLocation);
+    }
+
+    public void setFirstCall(boolean firstCall) {
+        UpgradePanel.firstCall = firstCall;
     }
 }

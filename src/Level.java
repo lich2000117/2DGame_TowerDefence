@@ -177,6 +177,7 @@ public class Level {
             Tower selectedTower = getTowerAtMouse(point);
             if ((selectedTower!=null)&&(!upgrading)) {
                 this.upgradePanel = new UpgradePanel(player, this, selectedTower);
+                this.upgradePanel.setFirstCall(true);
                 upgrading = true;
                 // UpgradeExistTower
             }

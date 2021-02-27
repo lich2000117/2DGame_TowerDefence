@@ -196,7 +196,7 @@ class MY_WINDOW():
             pass_check = False
             factor = 0.01
             for i in range(1, 101):
-                sleep(random.randint(1,7)*factor)
+                sleep(random.randint(1,5)*factor)
                 p.step()
                 if (i<10):
                     s.configure("LabeledProgressbar", text="Initializing... {0} %      ".format(i))
@@ -217,7 +217,7 @@ class MY_WINDOW():
                     factor = 0.02
                     s.configure("LabeledProgressbar", text="Loading Game... {0} %      ".format(i))
                 else:
-                    factor = 0.008
+                    factor = 0.005
                     s.configure("LabeledProgressbar", text="Launching Game... {0} %      ".format(i))
                 root.update()
             return True
