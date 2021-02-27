@@ -76,7 +76,7 @@ class MY_WINDOW():
         positionRight = int(tk_window.winfo_screenwidth()/2 - tk_window.winfo_reqwidth()/2)
         positionDown = int(tk_window.winfo_screenheight()/2 - tk_window.winfo_reqheight()/2)
         # Positions the window in the center of the page.
-        tk_window.geometry("+{}+{}".format(positionRight+tk_window.width/2, positionDown+tk_window.height/2))
+        tk_window.geometry("+{}+{}".format(positionRight, positionDown))
         
     #日志动态打印
     def write_log_to_Text(self,logmsg):
