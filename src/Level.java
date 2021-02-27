@@ -383,8 +383,6 @@ public class Level {
                 return s;
             }
         }
-        System.out.println("Level, line 338, cannot return tower at mouse position, placing status:");
-        System.out.println(placing);
         return null;
     }
 

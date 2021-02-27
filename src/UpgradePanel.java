@@ -97,11 +97,11 @@ public class UpgradePanel extends Observer{
      * draw key binding settings
      */
     private void drawTowerInfo() {
-        textFont.drawString("Name: \n "+this.selectedTower.getNAME()+"\n" +
-                "DMG:   "+this.selectedTower.getDamage()+ "\n" +
-                "Range: "+this.selectedTower.getRadius()+"\n" +
-                "Rate:   "+String.format("%.1f", this.selectedTower.getFireRate())+"\n",
-                panelLocation.x/8, panelImg.getHeight()/4);
+        textFont.drawString("\n\n\n "+this.selectedTower.getNAME()+"\n\n\n\n\n\n" +
+                "DMG:   "+this.selectedTower.getDamage()+ "\n\n" +
+                "Range: "+this.selectedTower.getRadius()+"\n\n" +
+                "Rate:   "+String.format("%.1f", this.selectedTower.getFireRate())+"\n\n",
+                panelLocation.x/8, panelImg.getHeight()/8);
     }
 
 
@@ -123,12 +123,13 @@ public class UpgradePanel extends Observer{
      *
      */
     protected void update(Input input) {
+        //Draw Tower's range as a circle
+        Drawing.drawCircle(selectedTower.getCenter(),selectedTower.getRadius(), new Colour(200,200,54,0.5));
         //draw panel
         panelImg.draw(panelLocation.x, panelLocation.y);
-
         //draw object images:
-        // if no next upgrade, don't draw.
-        if ((Upgrade_PRICE >= 0 )){
+        // if no next upgrade, don't draw upgrade module.
+        if ((selectedTower.getNextTower() != null )){
             UpgradeImg.draw(panelLocation.x, panelImg.getHeight()/2 + 50);
             drawUpgradeModule();
             //check if clicked after the initialize, get selected item and upgrade it:
@@ -136,7 +137,10 @@ public class UpgradePanel extends Observer{
                 upgradeTower(input);
             }
         }
-        //draw Price and Key binding messages
+        else{
+            upgradeFont.drawString("MAX_LVL", panelLocation.x/16, panelImg.getHeight()/2);
+        }
+        //draw text of Tower's information
         drawTowerInfo();
         firstCall = false; //first time initialize without executing buttons
     }

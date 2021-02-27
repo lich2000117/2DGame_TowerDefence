@@ -10,7 +10,7 @@ public class Bomb extends Sprite{
     private static final String IMAGE_FILE = Sprite.getCurPath() + "res/images/explosive.png";
     private static final int DAMAGE = 500;
     private static final double DETONATEDELAY = 2.0;
-    private static final int RADIUS = 200;
+    private static final int RADIUS = 150;
     private double detonateCountDown;
     private boolean detonated = false;
 

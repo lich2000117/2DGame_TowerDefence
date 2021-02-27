@@ -16,7 +16,7 @@ public class AirSupport extends Tower{
     private static final int DAMAGE = 500;
     private static final int SPEED = 3;
     private static final int COST = 500;
-    private static final int RADIUS = 200;
+    private static final int RADIUS = 10;
     private static final String IMAGE = Sprite.getCurPath() + "res/images/airsupport.png";
     private static boolean direction = true;
     private boolean finishedFly = false;
@@ -35,7 +35,7 @@ public class AirSupport extends Tower{
      *
      */
     public AirSupport(Point point) {
-        super("AirSuport",point, IMAGE, DAMAGE, COST, RADIUS, MINDELAY, null);
+        super("AirSupport",point, IMAGE, DAMAGE, COST, RADIUS, MINDELAY, null);
         if (direction) {
             updateCenter(new Point(0,getCenter().y));
             // plus 10 here to avoid been stuck at the edge of the window
@@ -132,4 +132,7 @@ public class AirSupport extends Tower{
         return COST;
     }
 
+    public static boolean getDirection() {
+        return direction;
+    }
 }

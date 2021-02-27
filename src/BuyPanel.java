@@ -50,7 +50,7 @@ public class BuyPanel extends Observer{
     //for rendering hovering function
     private Point panelLocation;
     private Level level;
-    private Image currSelection;
+    private Tower currSelection;
     private static boolean placing = false;
 
 
@@ -188,7 +188,7 @@ public class BuyPanel extends Observer{
                     this.level.setCurrSelection("tank");
                     placing = true;
                     //set image displays upon hovering
-                    this.currSelection = tankImg;
+                    this.currSelection = new Tank(mousePos);
                 }
             }
             else if (superTankImg.getBoundingBoxAt(new Point(INI_WIDTH+GAP,
@@ -196,7 +196,7 @@ public class BuyPanel extends Observer{
                 if (wallet>=SUPERTANK_PRICE) {
                     this.level.setCurrSelection("supertank");
                     placing = true;
-                    this.currSelection = superTankImg;
+                    this.currSelection = new SuperTank(mousePos);
                 }
             }
             else if (airSupportImg.getBoundingBoxAt(new Point(INI_WIDTH+GAP*2,
@@ -204,7 +204,7 @@ public class BuyPanel extends Observer{
                 if (wallet >= AIRSUPPORT_PRICE) {
                     this.level.setCurrSelection("airsupport");
                     placing = true;
-                    this.currSelection = airSupportImg;
+                    this.currSelection = null;
                 }
             }
         }
@@ -218,10 +218,23 @@ public class BuyPanel extends Observer{
     /**
      * draw target Image at the cursor position
      * @param point point drawing at
-     * @param image image that to be drawing
+     * @param selectedTower tower that to be drawing
      */
-    private void drawCursor(Point point, Image image){
-        image.draw(point.x,point.y);
+    private void drawCursor(Point point, Tower selectedTower){
+        //if selecting airsupport, draw its special range
+        if (selectedTower==null) {
+            if (AirSupport.getDirection()) {
+                Drawing.drawRectangle(0, point.y - Bomb.getRADIUS() / 2, ShadowDefend.WIDTH, Bomb.getRADIUS(), new Colour(200, 200, 54, 0.5));
+            }
+            else{
+                Drawing.drawRectangle(point.x - Bomb.getRADIUS() / 2, 0, Bomb.getRADIUS(), ShadowDefend.HEIGHT, new Colour(200, 200, 54, 0.5));
+            }
+            new Image(AIRSUPPORT).draw(point.x,point.y);
+        }
+        else {
+            Drawing.drawCircle(point, selectedTower.getRadius(), new Colour(200, 200, 54, 0.5));
+            selectedTower.getImage().draw(point.x,point.y);
+        }
     }
 
     /**
