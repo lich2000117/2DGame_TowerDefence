@@ -14,6 +14,7 @@ import webbrowser
 from tkinter import *  # GUI module
 from tkinter.ttk import Progressbar, Style
 from time import sleep
+import tkinter.font as tf
 import random
 
 
@@ -38,7 +39,8 @@ class MY_WINDOW():
         self.window_to_center(self.init_window_name)
  
         #标签
-        self.title_label = Label(self.init_window_name, text="ShadowDefend")
+        ft = tf.Font(family="{Times}", size=30,weight=tf.BOLD) 
+        self.title_label = Label(self.init_window_name, text="ShadowDefend", font = ft)
         self.title_label.grid(row=0, column=2)
         
         #self.log_data_Text = Text(self.init_window_name, width=65, height=9) # 日志框
@@ -101,9 +103,14 @@ class MY_WINDOW():
         return os.path.join(base_path, relative_path)
 
     # Function that runs game directly using command line
-    def run_game(self, file_path):
+    def run_game_map1(self, file_path):
         file_path = self.resource_path(file_path)
-        subprocess.call(['javaw', '-jar', file_path])
+        subprocess.call(['javaw', '-jar', file_path,"1"])
+
+    # Function that runs game directly using command line
+    def run_game_map2(self, file_path):
+        file_path = self.resource_path(file_path)
+        subprocess.call(['javaw', '-jar', file_path,"2"])
 
 
     # function to open a new window for more Help Page
@@ -159,14 +166,15 @@ class MY_WINDOW():
         # Toplevel widget 
         self.selectWindow.title("开始游戏") 
         #Java Link
-        text = Label(self.selectWindow, text="困难选择：", height=4, width = 60)
+        ft2 = tf.Font(family="{Times}", size=15,weight=tf.BOLD) 
+        text = Label(self.selectWindow, text="关卡选择：", height=3, width = 40, font = ft2)
         text.pack()
-        start_button = Button(self.selectWindow, text="Easy", bg="Lawngreen", width=25,command=lambda : self.progressbar(file_path)) # 调用内部方法 加()为直接调用
+        start_button = Button(self.selectWindow, text="Level1", bg="Lawngreen", width=60,command=lambda : self.progressbar(file_path,1)) # 调用内部方法 加()为直接调用
         start_button.pack()
-        install_java_button = Button(self.selectWindow, text="Hard", bg="Coral", width=25,command=lambda : self.progressbar(file_path)) # 调用内部方法 加()为直接调用
+        install_java_button = Button(self.selectWindow, text="Level2", bg="Cyan", width=60,command=lambda : self.progressbar(file_path,2)) # 调用内部方法 加()为直接调用
         install_java_button.pack()
 
-    def progressbar(self, file_path):
+    def progressbar(self, file_path, mapNum):
         root = Toplevel(self.init_window_name) 
         root.resizable(False, False)
         self.window_to_center(root)
@@ -225,7 +233,10 @@ class MY_WINDOW():
         if launch_Check():
             root.destroy()
             self.selectWindow.destroy()
-            self.run_game(file_path)
+            if mapNum == 1:
+                self.run_game_map1(file_path)
+            else:
+                self.run_game_map2(file_path)
     
 
 

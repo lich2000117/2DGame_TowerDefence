@@ -1,9 +1,10 @@
-# MacOS
+# Windows Win10
 # Python Packaging system to run java jar programme.
 # Simple User Interface
 # Programmed by Chenghao Li
 # github: lich2000117
 # 24/02/2021
+
 
 import subprocess
 import sys
@@ -13,6 +14,7 @@ import webbrowser
 from tkinter import *  # GUI module
 from tkinter.ttk import Progressbar, Style
 from time import sleep
+import tkinter.font as tf
 import random
 
 
@@ -37,7 +39,8 @@ class MY_WINDOW():
         self.window_to_center(self.init_window_name)
  
         #标签
-        self.title_label = Label(self.init_window_name, text="ShadowDefend")
+        ft = tf.Font(family="{Times}", size=30,weight=tf.BOLD) 
+        self.title_label = Label(self.init_window_name, text="ShadowDefend", font = ft)
         self.title_label.grid(row=0, column=2)
         
         #self.log_data_Text = Text(self.init_window_name, width=65, height=9) # 日志框
@@ -76,7 +79,7 @@ class MY_WINDOW():
         positionDown = int(tk_window.winfo_screenheight()/2 - tk_window.winfo_reqheight()/2)
         # Positions the window in the center of the page.
         tk_window.geometry("+{}+{}".format(positionRight, positionDown))
-
+        
     #日志动态打印
     def write_log_to_Text(self,logmsg):
         global LOG_LINE_NUM
@@ -100,12 +103,20 @@ class MY_WINDOW():
         return os.path.join(base_path, relative_path)
 
     # Function that runs game directly using command line
-    def run_game(self, file_path):
+    def run_game_map1(self, file_path):
         file_path = self.resource_path(file_path)
         try:
-            subprocess.call(['javaw', '-jar', file_path])
+            subprocess.call(['javaw', '-jar', file_path,"1"])
         except:
-            subprocess.call(['java', '-jar', file_path])
+            subprocess.call(['java', '-jar', file_path,"1"])
+
+    # Function that runs game directly using command line
+    def run_game_map2(self, file_path):
+        file_path = self.resource_path(file_path)
+        try:
+            subprocess.call(['javaw', '-jar', file_path,"2"])
+        except:
+            subprocess.call(['java', '-jar', file_path,"1"])
 
 
     # function to open a new window for more Help Page
@@ -161,14 +172,15 @@ class MY_WINDOW():
         # Toplevel widget 
         self.selectWindow.title("开始游戏") 
         #Java Link
-        text = Label(self.selectWindow, text="困难选择：", height=4, width = 60)
+        ft2 = tf.Font(family="{Times}", size=15,weight=tf.BOLD) 
+        text = Label(self.selectWindow, text="关卡选择：", height=3, width = 40, font = ft2)
         text.pack()
-        start_button = Button(self.selectWindow, text="Easy", bg="Lawngreen", width=25,command=lambda : self.progressbar(file_path)) # 调用内部方法 加()为直接调用
+        start_button = Button(self.selectWindow, text="Level1", bg="Lawngreen", width=60,command=lambda : self.progressbar(file_path,1)) # 调用内部方法 加()为直接调用
         start_button.pack()
-        install_java_button = Button(self.selectWindow, text="Hard", bg="Coral", width=25,command=lambda : self.progressbar(file_path)) # 调用内部方法 加()为直接调用
+        install_java_button = Button(self.selectWindow, text="Level2", bg="Cyan", width=60,command=lambda : self.progressbar(file_path,2)) # 调用内部方法 加()为直接调用
         install_java_button.pack()
 
-    def progressbar(self, file_path):
+    def progressbar(self, file_path, mapNum):
         root = Toplevel(self.init_window_name) 
         root.resizable(False, False)
         self.window_to_center(root)
@@ -198,7 +210,7 @@ class MY_WINDOW():
             pass_check = False
             factor = 0.01
             for i in range(1, 101):
-                sleep(random.randint(1,7)*factor)
+                sleep(random.randint(1,4)*factor)
                 p.step()
                 if (i<10):
                     s.configure("LabeledProgressbar", text="Initializing... {0} %      ".format(i))
@@ -209,17 +221,17 @@ class MY_WINDOW():
                         # Check if Java is installed
                         if not pass_check:
                             try:
-                                subprocess.call('java')
+                                subprocess.call('javaw')
                             except Exception:
                                 s.configure("LabeledProgressbar", text="Error! Missing Java JDK!      ".format(i), bg='red')
                                 root.update()
                                 Button(root, command=self.moreHelpWindow, text="Download Java JDK",bg='red').pack()
                                 return False
                 elif (i>50) and (i<75):
-                    factor = 0.02
+                    factor = 0.01
                     s.configure("LabeledProgressbar", text="Loading Game... {0} %      ".format(i))
                 else:
-                    factor = 0.008
+                    factor = 0.005
                     s.configure("LabeledProgressbar", text="Launching Game... {0} %      ".format(i))
                 root.update()
             return True
@@ -227,7 +239,10 @@ class MY_WINDOW():
         if launch_Check():
             root.destroy()
             self.selectWindow.destroy()
-            self.run_game(file_path)
+            if mapNum == 1:
+                self.run_game_map1(file_path)
+            else:
+                self.run_game_map2(file_path)
     
 
 

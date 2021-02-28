@@ -26,7 +26,7 @@ public class ShadowDefend extends AbstractGame {
     public static final Keys SPEED_UP = Keys.L;
     public static final Keys START_WAVE = Keys.S;
     //set up the maximum levels have here
-    public static final int MAX_LEVELS = 2;
+    public static final int MAX_LEVELS = 1;
     private static final int START_MONEY = 300;
     private static final int START_HEALTH = 25;
 
@@ -46,8 +46,9 @@ public class ShadowDefend extends AbstractGame {
 
     /**
      * Creates a new instance of the ShadowDefend game, with 2 levels
+     * @param currLevelNum current
      */
-    public ShadowDefend() {
+    public ShadowDefend(int mapNum) {
         super(WIDTH, HEIGHT, "ShadowDefend");
         levels = new ArrayList<>();
 
@@ -55,8 +56,15 @@ public class ShadowDefend extends AbstractGame {
         this.player = Player.setPlayer(START_MONEY, START_HEALTH);
 
         //add 2 levels into our levels lists
-        levels.add(new Level(MAP_FILE1,player, 1));
-        levels.add(new Level(MAP_FILE2,player, 2));
+        if (mapNum == 1) {
+            levels.add(new Level(MAP_FILE1, player, 1));
+        }
+        else if (mapNum == 2){
+            levels.add(new Level(MAP_FILE2, player, 2));
+        }
+        else{
+            System.out.println("Level : line 67, commandline argument error");
+        }
 
         //start with first level, index at 0
         this.currLevel = levels.get(0);
@@ -72,7 +80,7 @@ public class ShadowDefend extends AbstractGame {
      * @param args Optional command-line arguments
      */
     public static void main(String[] args) {
-        new ShadowDefend().run();
+        new ShadowDefend(Integer.parseInt(args[0])).run();
     }
 
     /**
