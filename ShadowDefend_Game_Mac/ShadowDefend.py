@@ -116,7 +116,7 @@ class MY_WINDOW():
         try:
             subprocess.call(['javaw', '-jar', file_path,"2"])
         except:
-            subprocess.call(['java', '-jar', file_path,"1"])
+            subprocess.call(['java', '-jar', file_path,"2"])
 
 
     # function to open a new window for more Help Page
@@ -175,9 +175,9 @@ class MY_WINDOW():
         ft2 = tf.Font(family="{Times}", size=15,weight=tf.BOLD) 
         text = Label(self.selectWindow, text="关卡选择：", height=3, width = 40, font = ft2)
         text.pack()
-        start_button = Button(self.selectWindow, text="Level1", bg="Lawngreen", width=60,command=lambda : self.progressbar(file_path,1)) # 调用内部方法 加()为直接调用
+        start_button = Button(self.selectWindow, text="Easy", bg="Lawngreen", width=60,command=lambda : self.progressbar(file_path,1)) # 调用内部方法 加()为直接调用
         start_button.pack()
-        install_java_button = Button(self.selectWindow, text="Level2", bg="Cyan", width=60,command=lambda : self.progressbar(file_path,2)) # 调用内部方法 加()为直接调用
+        install_java_button = Button(self.selectWindow, text="Hard", bg="Cyan", width=60,command=lambda : self.progressbar(file_path,2)) # 调用内部方法 加()为直接调用
         install_java_button.pack()
 
     def progressbar(self, file_path, mapNum):
@@ -221,7 +221,7 @@ class MY_WINDOW():
                         # Check if Java is installed
                         if not pass_check:
                             try:
-                                subprocess.call('javaw')
+                                subprocess.call('java')
                             except Exception:
                                 s.configure("LabeledProgressbar", text="Error! Missing Java JDK!      ".format(i), bg='red')
                                 root.update()
