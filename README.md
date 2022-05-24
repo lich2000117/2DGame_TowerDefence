@@ -9,9 +9,18 @@ A tower defence Game Based On
 1. You need to install latest [JAVA](https://www.oracle.com/java/technologies/downloads/#license-lightbox) to run the program.
 1. Download from the release and run the program
 
-<p align="left">
-  <img src="image.png"  width="1000" >
-</p>
+
+Launcher       |  Launcher
+:-------------------------:|:-------------------------:
+![](./launcher1.png)  |  <img src="./launcher2.png">
+
+Upgrade       |  Airplane
+:-------------------------:|:-------------------------:
+![](./upgrade.png)  |  <img src="./airplane.png">
+
+Level2       |  Overall
+:-------------------------:|:-------------------------:
+![](./level2.png)  |  <img src="./image.png">
 
 
 
